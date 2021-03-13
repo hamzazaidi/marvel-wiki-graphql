@@ -5,14 +5,14 @@ import {
   GraphQLSchema,
   GraphQLID,
   GraphQLInt,
-} from 'graphql';
-import axios from 'axios';
-import { getUrlById } from '../helper/url';
-import { MarvelApiResponse } from '@marvel-wiki/api-interfaces';
-import { Character } from './character'
+} from "graphql";
+import axios from "axios";
+import { getUrl } from "../helper/url";
+import { MarvelApiResponse } from "@marvel-wiki/api-interfaces";
+import { Character } from "./character";
 
 const RootQuery = new GraphQLObjectType({
-  name: 'RootQueryType',
+  name: "RootQueryType",
   fields: {
     character: {
       type: Character,
@@ -21,11 +21,24 @@ const RootQuery = new GraphQLObjectType({
       },
       async resolve(parent, args) {
         try {
-          const url = getUrlById(`characters/${args.id}`);
+          const url = getUrl(`characters/${args.id}`);
           const result = await axios.get<MarvelApiResponse>(url);
           return result.data.data.results[0];
         } catch (error) {
-          console.log('🚀 ~ file: index.ts ~ line 39 ~ resolve ~ error', error);
+          console.log("🚀 ~ file: index.ts ~ line 39 ~ resolve ~ error", error);
+        }
+      },
+    },
+    characters: {
+      type: new GraphQLList(Character),
+      async resolve(parent, args) {
+        try {
+          const url = getUrl("characters");
+          const result = await axios.get<MarvelApiResponse>(url);
+          console.log("🚀 ~ file: index.ts ~ line 39 ~ resolve ~ result", result)
+          return result.data.data.results;
+        } catch (error) {
+          console.log("🚀 ~ file: index.ts ~ line 37 ~ resolve ~ error", error);
         }
       },
     },

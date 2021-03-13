@@ -6,7 +6,7 @@ import {
   GraphQLString,
   GraphQLList,
 } from "graphql";
-import { getUrlById } from "../../helper/url";
+import { getUrl } from "../../helper/url";
 import { Comic } from "../comic";
 import { Series } from "../series";
 import { Avatar } from "../shared";
@@ -26,7 +26,7 @@ export const Character = new GraphQLObjectType({
       type: new GraphQLList(Comic),
       async resolve(parent, args) {
         try {
-          const url = getUrlById(`characters/${parent.id}/comics`);
+          const url = getUrl(`characters/${parent.id}/comics`);
           const result = await axios.get<MarvelApiResponse>(url);
           return result.data.data.results;
         } catch (error) {
@@ -38,7 +38,7 @@ export const Character = new GraphQLObjectType({
       type: new GraphQLList(Series),
       async resolve(parent, args) {
         try {
-          const url = getUrlById(`characters/${parent.id}/series`);
+          const url = getUrl(`characters/${parent.id}/series`);
           const result = await axios.get<MarvelApiResponse>(url);
           return result.data.data.results;
         } catch (error) {
@@ -50,7 +50,7 @@ export const Character = new GraphQLObjectType({
       type: new GraphQLList(Event),
       async resolve(parent, args) {
         try {
-          const url = getUrlById(`characters/${parent.id}/events`);
+          const url = getUrl(`characters/${parent.id}/events`);
           const result = await axios.get<MarvelApiResponse>(url);
           return result.data.data.results;
         } catch (error) {
@@ -62,7 +62,7 @@ export const Character = new GraphQLObjectType({
       type: new GraphQLList(Story),
       async resolve(parent, args) {
         try {
-          const url = getUrlById(`characters/${parent.id}/stories`);
+          const url = getUrl(`characters/${parent.id}/stories`);
           const result = await axios.get<MarvelApiResponse>(url);
           return result.data.data.results;
         } catch (error) {
