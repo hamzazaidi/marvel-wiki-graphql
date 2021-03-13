@@ -130,6 +130,20 @@ const Series = new GraphQLObjectType({
   })
 })
 
+const Story = new GraphQLObjectType({
+  name: 'Story',
+  fields: () => ({
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    description: { type: GraphQLString },
+    resourceURI: { type: GraphQLString },
+    type: { type: GraphQLString },
+    modified: { type: GraphQLString },
+    thumbnail: { type: Avatar },
+    originalissue: { type: ComicSummary }
+  })
+})
+
 const Character = new GraphQLObjectType({
   name: 'Character',
   fields: () => ({
@@ -168,6 +182,18 @@ const Character = new GraphQLObjectType({
       async resolve(parent, args) {
         try {
           const url = getUrlById(`characters/${parent.id}/events`);
+          const result = await axios.get<MarvelApiResponse>(url);
+          return result.data.data.results;
+        } catch (error) {
+          console.log('🚀 ~ file: index.ts ~ line 39 ~ resolve ~ error', error);
+        }
+      },
+    },
+    stories: {
+      type: new GraphQLList(Story),
+      async resolve(parent, args) {
+        try {
+          const url = getUrlById(`characters/${parent.id}/stories`);
           const result = await axios.get<MarvelApiResponse>(url);
           return result.data.data.results;
         } catch (error) {
