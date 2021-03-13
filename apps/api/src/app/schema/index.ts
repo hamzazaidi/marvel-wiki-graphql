@@ -43,8 +43,8 @@ const ComicPrice = new GraphQLObjectType({
   })
 })
 
-const Comics = new GraphQLObjectType({
-  name: 'Comics',
+const Comic = new GraphQLObjectType({
+  name: 'Comic',
   fields: () => ({
     id: { type: GraphQLID },
     digitalId: {type: GraphQLInt },
@@ -79,6 +79,31 @@ const Avatar = new GraphQLObjectType({
   }),
 });
 
+const EventSummary = new GraphQLObjectType({
+  name: 'EventSummary',
+  fields: () => ({
+    resourceURI: { type: GraphQLString },
+    name: { type: GraphQLString },
+  })
+})
+
+const Event = new GraphQLObjectType({
+  name: 'Event',
+  fields: () => ({
+    id: { type: GraphQLID },
+    title: { type: GraphQLString },
+    description: { type: GraphQLString },
+    resourceURI: { type: GraphQLString },
+    urls: { type: new GraphQLList(Url) },
+    modified: { type: GraphQLString },
+    start: { type: GraphQLString },
+    end: { type: GraphQLString },
+    thumbnail: { type: Avatar },
+    next: { type: EventSummary },
+    previous: { type: EventSummary },
+  })
+})
+
 const Character = new GraphQLObjectType({
   name: 'Character',
   fields: () => ({
@@ -89,7 +114,7 @@ const Character = new GraphQLObjectType({
     thumbnail: { type: Avatar },
     resourceURI: { type: GraphQLString },
     comics: {
-      type: new GraphQLList(Comics),
+      type: new GraphQLList(Comic),
       async resolve(parent, args) {
         try {
           const url = getUrlById(`characters/${parent.id}/comics`);
@@ -100,6 +125,18 @@ const Character = new GraphQLObjectType({
         }
       },
     },
+    events: {
+      type: new GraphQLList(Event),
+      async resolve(parent, args) {
+        try {
+          const url = getUrlById(`characters/${parent.id}/events`);
+          const result = await axios.get<MarvelApiResponse>(url);
+          return result.data.data.results;
+        } catch (error) {
+          console.log('🚀 ~ file: index.ts ~ line 39 ~ resolve ~ error', error);
+        }
+      },
+    }
   }),
 });
 
