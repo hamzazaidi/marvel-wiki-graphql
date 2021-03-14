@@ -5,8 +5,8 @@
   "scripts": {
     "nx": "nx",
     "start": "nx serve",
-    "build": "npm run build:server",    
-    "build:client": "nx build",    
+    "build": "npm run build:server",
+    "build:client": "nx build",
     "build:server": "npm run nx build api --prod",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
@@ -29,6 +29,7 @@
   },
   "private": true,
   "devDependencies": {
+    "@architect/sandbox": "^3.3.7",
     "@babel/core": "7.9.6",
     "@babel/preset-env": "7.9.6",
     "@babel/preset-react": "7.9.4",
