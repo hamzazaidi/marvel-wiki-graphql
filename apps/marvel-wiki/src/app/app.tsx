@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Message } from '@marvel-wiki/api-interfaces';
 
 export const App = () => {
-  const [m, setMessage] = useState<Message>({ message: '' });
+  const [m, setMessage] = useState({ message: '' });
 
   useEffect(() => {
     fetch('/api')
