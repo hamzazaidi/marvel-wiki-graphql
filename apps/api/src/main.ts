@@ -1,4 +1,5 @@
 import * as express from 'express';
+import * as path from 'path';
 import { graphqlHTTP } from 'express-graphql';
 import cors from 'cors';
 import { schema } from './app/schema'
@@ -11,7 +12,14 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true
 }));
 
-const port = process.env.port || 3333;
+app.use(express.static(__dirname + '/dist/marvel-wiki'));
+
+app.get('/*', function (req, res) {
+
+    res.sendFile(path.join(__dirname + '/dist/marvel-wiki/index.html'));
+});
+
+const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {
   console.log('Listening at http://localhost:' + port + '/graphql');
 });
