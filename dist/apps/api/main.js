@@ -520,25 +520,28 @@ const Story = new graphql__WEBPACK_IMPORTED_MODULE_0__["GraphQLObjectType"]({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! express */ "express");
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var express_graphql__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! express-graphql */ "express-graphql");
-/* harmony import */ var express_graphql__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(express_graphql__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! cors */ "cors");
-/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(cors__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _app_schema__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./app/schema */ "./apps/api/src/app/schema/index.ts");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var express_graphql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! express-graphql */ "express-graphql");
+/* harmony import */ var express_graphql__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(express_graphql__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! cors */ "cors");
+/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(cors__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _app_schema__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/schema */ "./apps/api/src/app/schema/index.ts");
+
 
 
 
 
 const app = express__WEBPACK_IMPORTED_MODULE_0__();
-app.use(cors__WEBPACK_IMPORTED_MODULE_2___default()());
-app.use('/graphql', Object(express_graphql__WEBPACK_IMPORTED_MODULE_1__["graphqlHTTP"])({
-    schema: _app_schema__WEBPACK_IMPORTED_MODULE_3__["schema"],
+app.use(cors__WEBPACK_IMPORTED_MODULE_3___default()());
+app.use('/graphql', Object(express_graphql__WEBPACK_IMPORTED_MODULE_2__["graphqlHTTP"])({
+    schema: _app_schema__WEBPACK_IMPORTED_MODULE_4__["schema"],
     graphiql: true
 }));
-//app.use(express.static(__dirname + '/dist/marvel-wiki'));
-// app.get('/*', function (req, res) {
-//     res.sendFile(path.join(__dirname, '..', '/marvel-wiki/index.html'));
-// });
+app.use(express__WEBPACK_IMPORTED_MODULE_0__["static"](__dirname + '../marvel-wiki'));
+app.get('/*', function (req, res) {
+    res.sendFile(path__WEBPACK_IMPORTED_MODULE_1__["join"](__dirname, '..', '/marvel-wiki/index.html'));
+});
 const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {
     console.log('Listening at http://localhost:' + port + '/graphql');
@@ -623,6 +626,17 @@ module.exports = require("graphql");
 /***/ (function(module, exports) {
 
 module.exports = require("md5");
+
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
 
 /***/ }),
 
