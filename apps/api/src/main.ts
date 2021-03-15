@@ -12,11 +12,10 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true
 }));
 
-app.use(express.static(__dirname + '/dist/marvel-wiki'));
+//app.use(express.static(__dirname + '/dist/marvel-wiki'));
 
 app.get('/*', function (req, res) {
-
-    res.sendFile(path.join(__dirname + '/dist/marvel-wiki/index.html'));
+    res.sendFile(path.join(__dirname, '..', '/marvel-wiki/index.html'));
 });
 
 const port = process.env.PORT || 3333;
