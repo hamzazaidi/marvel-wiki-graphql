@@ -538,7 +538,7 @@ app.use('/graphql', Object(express_graphql__WEBPACK_IMPORTED_MODULE_2__["graphql
     schema: _app_schema__WEBPACK_IMPORTED_MODULE_4__["schema"],
     graphiql: true
 }));
-app.use(express__WEBPACK_IMPORTED_MODULE_0__["static"](__dirname + '../marvel-wiki'));
+app.use(express__WEBPACK_IMPORTED_MODULE_0__["static"](path__WEBPACK_IMPORTED_MODULE_1__["join"](__dirname, '..', '/marvel-wiki')));
 app.get('/*', function (req, res) {
     res.sendFile(path__WEBPACK_IMPORTED_MODULE_1__["join"](__dirname, '..', '/marvel-wiki/index.html'));
 });

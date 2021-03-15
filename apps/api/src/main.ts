@@ -12,7 +12,7 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true
 }));
 
-app.use(express.static(__dirname + '../marvel-wiki'));
+app.use(express.static(path.join(__dirname, '..', '/marvel-wiki')));
 
 app.get('/*', function (req, res) {
     res.sendFile(path.join(__dirname, '..', '/marvel-wiki/index.html'));

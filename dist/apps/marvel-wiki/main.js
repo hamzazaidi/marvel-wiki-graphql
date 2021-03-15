@@ -17,9 +17,7 @@ const App = () => {
   const [m, setMessage] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     message: ''
   });
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    fetch('/api').then(r => r.json()).then(setMessage);
-  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: {
       textAlign: 'center'
