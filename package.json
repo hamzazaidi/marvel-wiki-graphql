@@ -2,10 +2,13 @@
   "name": "marvel-wiki",
   "version": "0.0.0",
   "license": "MIT",
+  "engines": {
+    "node": "10.x.x"
+  },
   "scripts": {
     "nx": "nx",
-    "start": "nx serve",
-    "build": "npm run build:server",
+    "start": "node dist/apps/api/main.js",
+    "build:all": "npm run build:client && npm run build:server",
     "build:client": "nx build",
     "build:server": "npm run nx build api --prod",
     "test": "nx test",

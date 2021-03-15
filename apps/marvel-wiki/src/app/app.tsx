@@ -4,9 +4,6 @@ export const App = () => {
   const [m, setMessage] = useState({ message: '' });
 
   useEffect(() => {
-    fetch('/api')
-      .then((r) => r.json())
-      .then(setMessage);
   }, []);
 
   return (
