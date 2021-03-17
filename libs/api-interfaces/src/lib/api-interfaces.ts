@@ -1,3 +1,8 @@
+export interface Config {
+  id: string;
+  gqlDomain: string;
+}
+
 export interface MarvelApiData {
   offset: number,
   limit: number,
