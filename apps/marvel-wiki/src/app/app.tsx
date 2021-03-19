@@ -13,7 +13,6 @@ export const App = () => {
     <ApolloProvider client={client}>  
       <div style={{ textAlign: 'center' }}>
         <h1>Welcome to marvel-wiki!</h1>
-        <Test />
       </div>
     </ApolloProvider>
   );
