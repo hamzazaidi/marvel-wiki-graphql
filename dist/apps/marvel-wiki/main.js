@@ -1,5 +1,43 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"],{
 
+/***/ "./app/Test.tsx":
+/*!**********************!*\
+  !*** ./app/Test.tsx ***!
+  \**********************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @apollo/client */ "../../../node_modules/@apollo/client/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+let _ = t => t,
+    _t;
+
+
+
+const GET_USERS = Object(_apollo_client__WEBPACK_IMPORTED_MODULE_0__["gql"])(_t || (_t = _`
+{
+  characters {
+    id
+  }
+}
+`));
+
+const Test = () => {
+  const {
+    loading,
+    error,
+    data
+  } = Object(_apollo_client__WEBPACK_IMPORTED_MODULE_0__["useQuery"])(GET_USERS);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", null, JSON.stringify(data));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Test);
+
+/***/ }),
+
 /***/ "./app/app.tsx":
 /*!*********************!*\
   !*** ./app/app.tsx ***!
@@ -10,22 +48,25 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "App", function() { return App; });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../../node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @apollo/client */ "../../../node_modules/@apollo/client/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Test__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Test */ "./app/Test.tsx");
+
+
+const client = new _apollo_client__WEBPACK_IMPORTED_MODULE_0__["ApolloClient"]({
+  uri: '/graphql',
+  cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_0__["InMemoryCache"]()
+});
 
 const App = () => {
-  const [m, setMessage] = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    message: ''
-  });
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, []);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_0__["ApolloProvider"], {
+    client: client
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
     style: {
       textAlign: 'center'
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome to marvel-wiki!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-    width: "450",
-    src: "https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, m.message));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Welcome to marvel-wiki!"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_Test__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 };
 /* harmony default export */ __webpack_exports__["default"] = (App);
 

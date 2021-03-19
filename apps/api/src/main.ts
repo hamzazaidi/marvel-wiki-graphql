@@ -1,9 +1,9 @@
 import * as express from 'express';
+import { readFileSync } from 'fs'
 import * as path from 'path';
 import { graphqlHTTP } from 'express-graphql';
 import cors from 'cors';
 import { schema } from './app/schema'
-
 const app = express();
 app.use(cors());
 
@@ -12,10 +12,13 @@ app.use('/graphql', graphqlHTTP({
   graphiql: true
 }));
 
+
 app.use(express.static(path.join(__dirname, '..', '/marvel-wiki')));
 
 app.get('/*', function (req, res) {
-    res.sendFile(path.join(__dirname, '..', '/marvel-wiki/index.html'));
+  res.send(readFileSync(path.join(__dirname, '..', '/marvel-wiki/index.html'), {
+    encoding: 'utf8'
+  }))
 });
 
 const port = process.env.PORT || 3333;

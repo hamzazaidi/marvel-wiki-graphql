@@ -97,8 +97,8 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getUrl", function() { return getUrl; });
 const baseUrl = 'https://gateway.marvel.com:443/v1/public';
-const publicKey = '811b2529a0130c92ab5c1a36e00c61e5';
-const privateKey = '426771ca28a1e77bfa361d0c09731bdadf0b63e3';
+const publicKey = process.env.publicKey;
+const privateKey = process.env.privateKey;
 const md5 = __webpack_require__(/*! md5 */ "md5");
 const getUrl = (urlPart) => {
     const ts = String(Date.now());
@@ -372,7 +372,6 @@ const RootQuery = new graphql__WEBPACK_IMPORTED_MODULE_1__["GraphQLObjectType"](
                     try {
                         const url = Object(_helper_url__WEBPACK_IMPORTED_MODULE_3__["getUrl"])("characters");
                         const result = yield axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(url);
-                        console.log("🚀 ~ file: index.ts ~ line 39 ~ resolve ~ result", result);
                         return result.data.data.results;
                     }
                     catch (error) {
@@ -520,27 +519,32 @@ const Story = new graphql__WEBPACK_IMPORTED_MODULE_0__["GraphQLObjectType"]({
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! express */ "express");
 /* harmony import */ var express__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(express__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! path */ "path");
-/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var express_graphql__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! express-graphql */ "express-graphql");
-/* harmony import */ var express_graphql__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(express_graphql__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! cors */ "cors");
-/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(cors__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _app_schema__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./app/schema */ "./apps/api/src/app/schema/index.ts");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! fs */ "fs");
+/* harmony import */ var fs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(fs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! path */ "path");
+/* harmony import */ var path__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(path__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var express_graphql__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! express-graphql */ "express-graphql");
+/* harmony import */ var express_graphql__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(express_graphql__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! cors */ "cors");
+/* harmony import */ var cors__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(cors__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _app_schema__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./app/schema */ "./apps/api/src/app/schema/index.ts");
+
 
 
 
 
 
 const app = express__WEBPACK_IMPORTED_MODULE_0__();
-app.use(cors__WEBPACK_IMPORTED_MODULE_3___default()());
-app.use('/graphql', Object(express_graphql__WEBPACK_IMPORTED_MODULE_2__["graphqlHTTP"])({
-    schema: _app_schema__WEBPACK_IMPORTED_MODULE_4__["schema"],
+app.use(cors__WEBPACK_IMPORTED_MODULE_4___default()());
+app.use('/graphql', Object(express_graphql__WEBPACK_IMPORTED_MODULE_3__["graphqlHTTP"])({
+    schema: _app_schema__WEBPACK_IMPORTED_MODULE_5__["schema"],
     graphiql: true
 }));
-app.use(express__WEBPACK_IMPORTED_MODULE_0__["static"](path__WEBPACK_IMPORTED_MODULE_1__["join"](__dirname, '..', '/marvel-wiki')));
+app.use(express__WEBPACK_IMPORTED_MODULE_0__["static"](path__WEBPACK_IMPORTED_MODULE_2__["join"](__dirname, '..', '/marvel-wiki')));
 app.get('/*', function (req, res) {
-    res.sendFile(path__WEBPACK_IMPORTED_MODULE_1__["join"](__dirname, '..', '/marvel-wiki/index.html'));
+    res.send(Object(fs__WEBPACK_IMPORTED_MODULE_1__["readFileSync"])(path__WEBPACK_IMPORTED_MODULE_2__["join"](__dirname, '..', '/marvel-wiki/index.html'), {
+        encoding: 'utf8'
+    }));
 });
 const port = process.env.PORT || 3333;
 const server = app.listen(port, () => {
@@ -604,6 +608,17 @@ module.exports = require("express");
 /***/ (function(module, exports) {
 
 module.exports = require("express-graphql");
+
+/***/ }),
+
+/***/ "fs":
+/*!*********************!*\
+  !*** external "fs" ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("fs");
 
 /***/ }),
 
