@@ -1,7 +1,3 @@
-export interface Config {
-  id: string;
-  gqlDomain: string;
-}
 
 export interface MarvelApiData {
   offset: number,
@@ -19,4 +15,9 @@ export interface MarvelApiResponse {
   attributionHTML:string;
   etag:string;
   data: MarvelApiData
+}
+
+export interface Avatar {
+  path: string;
+  extension: string;
 }
