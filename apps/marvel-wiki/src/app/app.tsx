@@ -1,22 +1,20 @@
-import React, { useEffect, useState } from 'react';
+
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
+import React from 'react';
+const client = new ApolloClient({
+  uri: '/graphql',
+  cache: new InMemoryCache()
+});
+import Test from './Test'
 
 export const App = () => {
-  const [m, setMessage] = useState({ message: '' });
-
-  useEffect(() => {
-  }, []);
 
   return (
-    <>
+    <ApolloProvider client={client}>  
       <div style={{ textAlign: 'center' }}>
         <h1>Welcome to marvel-wiki!</h1>
-        <img
-          width="450"
-          src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-        />
       </div>
-      <div>{m.message}</div>
-    </>
+    </ApolloProvider>
   );
 };
 

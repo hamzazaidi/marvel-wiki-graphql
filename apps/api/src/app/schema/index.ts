@@ -1,10 +1,8 @@
 import {
   GraphQLObjectType,
   GraphQLList,
-  GraphQLString,
   GraphQLSchema,
   GraphQLID,
-  GraphQLInt,
 } from "graphql";
 import axios from "axios";
 import { getUrl } from "../helper/url";
@@ -35,7 +33,6 @@ const RootQuery = new GraphQLObjectType({
         try {
           const url = getUrl("characters");
           const result = await axios.get<MarvelApiResponse>(url);
-          console.log("🚀 ~ file: index.ts ~ line 39 ~ resolve ~ result", result)
           return result.data.data.results;
         } catch (error) {
           console.log("🚀 ~ file: index.ts ~ line 37 ~ resolve ~ error", error);
