@@ -6,7 +6,9 @@ import { ThemeProvider } from '@material-ui/styles';
 import amber from '@material-ui/core/colors/amber';
 import Navbar from './components/nav-bar';
 import CharacterList from './components/character-list';
-const Uri = 'http://localhost:3333/graphql';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import CharacterDetail from './components/character-detail';
+const Uri = '/graphql';
 const client = new ApolloClient({
   uri: Uri,
   cache: new InMemoryCache()
@@ -27,11 +29,16 @@ const theme = createMuiTheme(
 export const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <ApolloProvider client={client}>  
-        <Navbar />
-        <div className="content">
-          <CharacterList />
-        </div>
+      <ApolloProvider client={client}>
+        <Router>
+          <Navbar />
+          <div className="content">
+            <Switch>
+              <Route exact path="/" component={CharacterList} />
+              <Route path="/character/:id" component={CharacterDetail} />
+            </Switch>
+          </div>
+        </Router>
       </ApolloProvider>
     </ThemeProvider>
   );
