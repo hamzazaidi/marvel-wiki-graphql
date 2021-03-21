@@ -23,7 +23,7 @@ const RootQuery = new GraphQLObjectType({
           const result = await axios.get<MarvelApiResponse>(url);
           return result.data.data.results[0];
         } catch (error) {
-          console.log("🚀 ~ file: index.ts ~ line 39 ~ resolve ~ error", error);
+          console.log("🚀 ~ file: index.ts ~ line 39 ~ resolve ~ error");
         }
       },
     },
@@ -31,11 +31,11 @@ const RootQuery = new GraphQLObjectType({
       type: new GraphQLList(Character),
       async resolve(parent, args) {
         try {
-          const url = getUrl("characters");
+          const url = getUrl("characters", { limit: 24 });
           const result = await axios.get<MarvelApiResponse>(url);
           return result.data.data.results;
         } catch (error) {
-          console.log("🚀 ~ file: index.ts ~ line 37 ~ resolve ~ error", error);
+          console.log("🚀 ~ file: index.ts ~ line 37 ~ resolve ~ error");
         }
       },
     },

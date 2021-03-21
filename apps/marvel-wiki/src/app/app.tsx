@@ -6,7 +6,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import amber from '@material-ui/core/colors/amber';
 import Navbar from './components/nav-bar';
 import CharacterList from './components/character-list';
-const Uri = '/graphql';
+const Uri = 'http://localhost:3333/graphql';
 const client = new ApolloClient({
   uri: Uri,
   cache: new InMemoryCache()
