@@ -13,22 +13,202 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @apollo/client */ "../../../node_modules/@apollo/client/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "../../../node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/styles */ "../../../node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_styles__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/styles */ "../../../node_modules/@material-ui/styles/esm/index.js");
+/* harmony import */ var _material_ui_core_colors_amber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/colors/amber */ "../../../node_modules/@material-ui/core/colors/amber.js");
+/* harmony import */ var _material_ui_core_colors_amber__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_material_ui_core_colors_amber__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _components_nav_bar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/nav-bar */ "./app/components/nav-bar.tsx");
+/* harmony import */ var _components_character_list__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/character-list */ "./app/components/character-list.tsx");
 
 
+
+
+
+
+
+const Uri = '/graphql';
 const client = new _apollo_client__WEBPACK_IMPORTED_MODULE_0__["ApolloClient"]({
-  uri: '/graphql',
+  uri: Uri,
   cache: new _apollo_client__WEBPACK_IMPORTED_MODULE_0__["InMemoryCache"]()
 });
+const theme = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_2__["createMuiTheme"])({
+  palette: {
+    primary: {
+      main: '#ff0519'
+    },
+    secondary: _material_ui_core_colors_amber__WEBPACK_IMPORTED_MODULE_4___default.a
+  }
+});
 const App = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_0__["ApolloProvider"], {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_material_ui_styles__WEBPACK_IMPORTED_MODULE_3__["ThemeProvider"], {
+    theme: theme
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_apollo_client__WEBPACK_IMPORTED_MODULE_0__["ApolloProvider"], {
     client: client
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
-    style: {
-      textAlign: 'center'
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("h1", null, "Welcome to marvel-wiki!")));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_nav_bar__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement("div", {
+    className: "content"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default.a.createElement(_components_character_list__WEBPACK_IMPORTED_MODULE_6__["default"], null))));
 };
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./app/components/character-list.tsx":
+/*!*******************************************!*\
+  !*** ./app/components/character-list.tsx ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "../../../node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_GridList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/GridList */ "../../../node_modules/@material-ui/core/esm/GridList/index.js");
+/* harmony import */ var _material_ui_core_GridListTile__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/GridListTile */ "../../../node_modules/@material-ui/core/esm/GridListTile/index.js");
+/* harmony import */ var _material_ui_core_GridListTileBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @material-ui/core/GridListTileBar */ "../../../node_modules/@material-ui/core/esm/GridListTileBar/index.js");
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @apollo/client */ "../../../node_modules/@apollo/client/index.js");
+/* harmony import */ var _queries__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../queries */ "./app/queries/index.ts");
+
+
+
+
+
+
+
+const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+    overflow: 'hidden',
+    backgroundColor: theme.palette.background.paper
+  },
+  gridList: {
+    width: 500,
+    height: 450
+  },
+  icon: {
+    color: 'rgba(255, 255, 255, 0.54)'
+  }
+}));
+
+const CharacterList = () => {
+  const classes = useStyles();
+  const {
+    loading,
+    error,
+    data: characterList
+  } = Object(_apollo_client__WEBPACK_IMPORTED_MODULE_5__["useQuery"])(_queries__WEBPACK_IMPORTED_MODULE_6__["GET_CHARACTERS"]);
+
+  const avatar = thumbnail => `${thumbnail.path}.${thumbnail.extension}`;
+
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.root
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_GridList__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    cellHeight: 300,
+    spacing: 0,
+    cols: 5
+  }, characterList === null || characterList === void 0 ? void 0 : characterList.characters.map(character => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_GridListTile__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    key: character.od
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: avatar(character.thumbnail)
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_GridListTileBar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    title: character.name
+  })))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (CharacterList);
+
+/***/ }),
+
+/***/ "./app/components/nav-bar.tsx":
+/*!************************************!*\
+  !*** ./app/components/nav-bar.tsx ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "../../../node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @material-ui/core/styles */ "../../../node_modules/@material-ui/core/esm/styles/index.js");
+/* harmony import */ var _material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @material-ui/core/AppBar */ "../../../node_modules/@material-ui/core/esm/AppBar/index.js");
+/* harmony import */ var _material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @material-ui/core/Toolbar */ "../../../node_modules/@material-ui/core/esm/Toolbar/index.js");
+/* harmony import */ var _assets_logo_png__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../assets/logo.png */ "./assets/logo.png");
+/* harmony import */ var _assets_logo_png__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_assets_logo_png__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+
+
+const useStyles = Object(_material_ui_core_styles__WEBPACK_IMPORTED_MODULE_1__["makeStyles"])(theme => ({
+  root: {
+    flexGrow: 1
+  },
+  img: {
+    width: 150,
+    height: 30
+  }
+}));
+
+const Navbar = () => {
+  const classes = useStyles();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: classes.root
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_AppBar__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    position: "static"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_material_ui_core_Toolbar__WEBPACK_IMPORTED_MODULE_3__["default"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+    src: _assets_logo_png__WEBPACK_IMPORTED_MODULE_4___default.a,
+    alt: "",
+    className: classes.img
+  }))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Navbar);
+
+/***/ }),
+
+/***/ "./app/queries/index.ts":
+/*!******************************!*\
+  !*** ./app/queries/index.ts ***!
+  \******************************/
+/*! exports provided: GET_CHARACTERS */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GET_CHARACTERS", function() { return GET_CHARACTERS; });
+/* harmony import */ var _apollo_client__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @apollo/client */ "../../../node_modules/@apollo/client/index.js");
+let _ = t => t,
+    _t;
+
+
+const GET_CHARACTERS = Object(_apollo_client__WEBPACK_IMPORTED_MODULE_0__["gql"])(_t || (_t = _`
+  {
+    characters {
+        id
+        name
+        thumbnail {
+            path
+            extension
+        }
+    }
+  }
+`));
+
+
+/***/ }),
+
+/***/ "./assets/logo.png":
+/*!*************************!*\
+  !*** ./assets/logo.png ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "logo.08ca569.png";
 
 /***/ }),
 

@@ -1,20 +1,46 @@
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 import React from 'react';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import amber from '@material-ui/core/colors/amber';
+import Navbar from './components/nav-bar';
+import CharacterList from './components/character-list';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import CharacterDetail from './components/character-detail';
+const Uri = '/graphql';
 const client = new ApolloClient({
-  uri: '/graphql',
+  uri: Uri,
   cache: new InMemoryCache()
 });
-import Test from './Test'
+
+const theme = createMuiTheme(
+  {
+    palette: {
+      primary: {
+        main: '#ff0519',
+      },
+      secondary: amber,
+    },
+  }
+);
+
 
 export const App = () => {
-
   return (
-    <ApolloProvider client={client}>  
-      <div style={{ textAlign: 'center' }}>
-        <h1>Welcome to marvel-wiki!</h1>
-      </div>
-    </ApolloProvider>
+    <ThemeProvider theme={theme}>
+      <ApolloProvider client={client}>
+        <Router>
+          <Navbar />
+          <div className="content">
+            <Switch>
+              <Route exact path="/" component={CharacterList} />
+              <Route path="/character/:id" component={CharacterDetail} />
+            </Switch>
+          </div>
+        </Router>
+      </ApolloProvider>
+    </ThemeProvider>
   );
 };
 

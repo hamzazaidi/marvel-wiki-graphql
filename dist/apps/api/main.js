@@ -100,10 +100,13 @@ const baseUrl = 'https://gateway.marvel.com:443/v1/public';
 const publicKey = process.env.publicKey;
 const privateKey = process.env.privateKey;
 const md5 = __webpack_require__(/*! md5 */ "md5");
-const getUrl = (urlPart) => {
+const getUrl = (urlPart, params = {}) => {
+    const qs = Object.keys(Object.assign({}, params))
+        .map(key => `${key}=${params[key]}`)
+        .join('&');
     const ts = String(Date.now());
     const hash = md5(ts + privateKey + publicKey);
-    const url = `${baseUrl}/${urlPart}?ts=${ts}&apikey=${publicKey}&hash=${hash}`;
+    const url = `${baseUrl}/${urlPart}?ts=${ts}&apikey=${publicKey}&hash=${hash}&${qs}`;
     return url;
 };
 
@@ -360,7 +363,7 @@ const RootQuery = new graphql__WEBPACK_IMPORTED_MODULE_1__["GraphQLObjectType"](
                         return result.data.data.results[0];
                     }
                     catch (error) {
-                        console.log("🚀 ~ file: index.ts ~ line 39 ~ resolve ~ error", error);
+                        console.log("🚀 ~ file: index.ts ~ line 39 ~ resolve ~ error");
                     }
                 });
             },
@@ -370,12 +373,12 @@ const RootQuery = new graphql__WEBPACK_IMPORTED_MODULE_1__["GraphQLObjectType"](
             resolve(parent, args) {
                 return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {
                     try {
-                        const url = Object(_helper_url__WEBPACK_IMPORTED_MODULE_3__["getUrl"])("characters");
+                        const url = Object(_helper_url__WEBPACK_IMPORTED_MODULE_3__["getUrl"])("characters", { limit: 24 });
                         const result = yield axios__WEBPACK_IMPORTED_MODULE_2___default.a.get(url);
                         return result.data.data.results;
                     }
                     catch (error) {
-                        console.log("🚀 ~ file: index.ts ~ line 37 ~ resolve ~ error", error);
+                        console.log("🚀 ~ file: index.ts ~ line 37 ~ resolve ~ error");
                     }
                 });
             },
