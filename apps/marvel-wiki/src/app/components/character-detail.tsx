@@ -4,14 +4,18 @@ import { useParams } from "react-router-dom";
 import { GET_CHARACTER } from "../queries";
 import { Avatar as AvatarImg, makeStyles } from "@material-ui/core";
 import { Avatar } from "@marvel-wiki/api-interfaces";
+import { Typography } from '@material-ui/core';
 export interface CharacterDetailProps { }
 const useStyles = makeStyles((theme) => ({
     topbar: {
-
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column'
     },
-    large: {
-        width: 200,
-        height: 200,
+    avatar: {
+        alignSelf: 'center',
+        width: 150,
+        height: 150,
     }
 }));
 
@@ -27,7 +31,10 @@ const CharacterDetail: React.SFC<CharacterDetailProps> = () => {
             {
                 data && <div>
                     <div className={classes.topbar}>
-                        <AvatarImg alt={ data.character.name } src={ avatar(data.character.thumbnail) } className={classes.large} />
+                        <AvatarImg alt={ data.character.name } src={ avatar(data.character.thumbnail) } className={classes.avatar} />
+                        <Typography align="center" component="h2">
+                            { data.character.name }
+                        </Typography>
                     </div>
                 </div>
             }
