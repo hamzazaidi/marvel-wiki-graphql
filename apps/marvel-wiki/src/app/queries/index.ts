@@ -12,7 +12,35 @@ const GET_CHARACTERS = gql`
   }
 `
 
+const GET_CHARACTER = gql`
+  query Character($id: ID) {
+    character(id: $id) {
+      id
+      name
+      description
+      thumbnail {
+        path
+        extension
+      }
+      comics {
+        id
+        title
+        description
+        thumbnail {
+          path
+          extension
+        }
+        images {
+          path
+          extension
+        }
+      }
+    }
+  }
+`
+
 
 export {
-    GET_CHARACTERS
+    GET_CHARACTERS,
+    GET_CHARACTER
 }
