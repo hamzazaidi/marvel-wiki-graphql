@@ -7,7 +7,7 @@
   },
   "scripts": {
     "nx": "nx",
-    "start": "node dist/apps/api/main.js",
+    "start": "npm run build:all && node dist/apps/api/main.js",
     "build:all": "npm run build:client && npm run build:server",
     "build:client": "nx build",
     "build:server": "npm run nx build api --prod",
