@@ -1,9 +1,9 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { useHistory } from "react-router-dom";
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import { useQuery } from '@apollo/client';
 import { Avatar } from '@marvel-wiki/api-interfaces';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -29,6 +29,7 @@ export interface CharacterListProps {}
 const CharacterList: React.SFC<CharacterListProps> = () => {
     const classes = useStyles();
     const theme = useTheme();
+    const history = useHistory();
     const matchesXSmall = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesMedium = useMediaQuery(theme.breakpoints.down('md'));    
@@ -40,12 +41,15 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
         if(matchesMedium) { return 6; }
         return 8;
     }
+    const handleClick = (character) => {
+        history.push(`/character/${character.id}`);
+    }
     return (
         <div className={classes.root}>
             <GridList cellHeight={300} spacing={0} cols={ getCols() }>
                 <GridListTile key="Subheader" cols={ getCols()} style={{ height: 'auto' }}></GridListTile>
                 {characterList?.characters.map((character) => (
-                    <GridListTile key={character.id}>
+                    <GridListTile key={character.id} onClick={ () => handleClick(character) }>
                         <img src={ avatar(character.thumbnail) } />
                         <GridListTileBar
                             title={character.name}                            
