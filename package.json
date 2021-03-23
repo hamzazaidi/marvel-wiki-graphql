@@ -7,11 +7,12 @@
   },
   "scripts": {
     "nx": "nx",
-    "start": "npm run build:all && node dist/apps/api/main.js",
+    "start": "node dist/apps/api/main.js",
     "build:all": "npm run build:client && npm run build:server",
     "build:client": "nx build",
     "build:server": "npm run nx build api --prod",
     "build:watch": "npm run build:all && nodemon dist/apps/api/main.js",
+    "heroku-postbuild": "npm run build:all",
     "test": "nx test",
     "lint": "nx workspace-lint && nx lint",
     "e2e": "nx e2e",
