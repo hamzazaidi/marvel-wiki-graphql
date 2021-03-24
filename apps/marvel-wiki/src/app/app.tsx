@@ -8,7 +8,8 @@ import Navbar from './components/nav-bar';
 import CharacterList from './components/character-list';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CharacterDetail from './components/character-detail';
-const Uri = '/graphql';
+import { primaryColor } from './colors'
+const Uri = 'http://localhost:3333/graphql';
 const client = new ApolloClient({
   uri: Uri,
   cache: new InMemoryCache()
@@ -18,7 +19,7 @@ const theme = createMuiTheme(
   {
     palette: {
       primary: {
-        main: '#ff0519',
+        main: primaryColor,
       },
       secondary: amber,
     },
