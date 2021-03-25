@@ -16,6 +16,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const CharacterDescription: React.SFC<CharacterDescriptionProps> = ({ description }) => {
     const classes = useStyles();
+    if (!description) { return <div></div> }
     return (
         <div className={classes.description}>
             <Card className={classes.descriptionCard} variant="outlined">

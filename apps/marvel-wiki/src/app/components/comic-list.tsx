@@ -19,10 +19,10 @@ const useStyles = makeStyles((theme) => ({
         flexWrap: "wrap"
     },
     comicCard: {
-        maxWidth: 250,
+        maxWidth: 150,
     },
     media: {
-        height: 450,
+        height: 250,
     }
 }));
  
@@ -42,22 +42,12 @@ const ComicList: React.SFC<ComicListProps> = ({ comics }) => {
                             title="Contemplative Reptile"
                         />
                         <CardContent>
-                            <Typography gutterBottom variant="h5" component="h2">
+                            <Typography gutterBottom variant="caption">
                                 { comic.title }
-                            </Typography>
-                            <Typography
-                                variant="body2"
-                                color="textSecondary"
-                                component="p"
-                            >
-                                { comic.description }
                             </Typography>
                         </CardContent>
                     </CardActionArea>
                     <CardActions>
-                        <Button size="small" color="primary">
-                            Share
-                        </Button>
                         <Button size="small" color="primary">
                             Learn More
                         </Button>

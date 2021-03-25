@@ -61,7 +61,7 @@ const Navbar = () => {
     return (
         <div className={classes.root}>
             <AppBar position="static">
-                <Toolbar>
+                <Toolbar variant="dense">
                     <img className={classes.title} src={logo} />
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
