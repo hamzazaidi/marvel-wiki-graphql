@@ -29,13 +29,15 @@ const RootQuery = new GraphQLObjectType({
     },
     characters: {
       type: new GraphQLList(Character),
-      async resolve(parent, args) {
-        try {
+      async resolve(parent, args, context) {
+        try { 
           const url = getUrl("characters", { limit: 24 });
           const result = await axios.get<MarvelApiResponse>(url);
-          return result.data.data.results;
+          const { results, ...metaData } = result.data.data;
+          context.res.set('meta-data', JSON.stringify(metaData));
+          return results;
         } catch (error) {
-          console.log("🚀 ~ file: index.ts ~ line 37 ~ resolve ~ error");
+          console.log("🚀 ~ file: index.ts ~ line 37 ~ resolve ~ error", error);
         }
       },
     },
