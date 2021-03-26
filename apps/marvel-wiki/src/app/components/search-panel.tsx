@@ -1,6 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { createStyles, debounce, Fab, makeStyles, Theme } from '@material-ui/core';
+import { Button, ButtonGroup, createStyles, debounce, Fab, makeStyles, Theme } from '@material-ui/core';
 export interface SearchPanelProps {
     handleQuery: Function
 }
@@ -9,6 +9,8 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             padding: theme.spacing(1),
+            display: 'flex',
+            flexDirection: 'column'
         },
         margin: {
             margin: theme.spacing(1),
@@ -35,20 +37,18 @@ const SearchPanel: React.SFC<SearchPanelProps> = ({ handleQuery }) => {
     }
     return (
         <form noValidate autoComplete="off" className={ classes.root }>
-            <TextField
-                id="outlined-search"
-                label="Search"
-                variant="outlined"
-                fullWidth={true}
-                onChange={ (e) => handleChange(e.target.value) }
-            />
+             <ButtonGroup
+                orientation="vertical"
+                color="primary"
+                aria-label="vertical contained primary button group"
+                variant="text"
+            >
             {
                 getCharacters().map(c => (
-                    <Fab size="small" color="secondary" aria-label="add" className={classes.margin} key={ c } onClick={ () => handleCharacterClick(c) }>
-                        { c }
-                    </Fab>
+                    <Button key={c} onClick={ () => handleCharacterClick(c) }>{ c }</Button>
                 ))
-            }            
+            }      
+            </ButtonGroup>      
         </form>
     );
 }

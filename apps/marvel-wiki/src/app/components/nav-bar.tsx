@@ -60,7 +60,7 @@ const Navbar = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <AppBar position="static">
+            <AppBar position="sticky">
                 <Toolbar variant="dense">
                     <img className={classes.title} src={logo} />
                     <div className={classes.search}>

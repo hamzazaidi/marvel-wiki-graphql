@@ -14,14 +14,14 @@ import SearchPanel from './search-panel';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        flexWrap: 'wrap',
+        flexDirection: 'row',
         justifyContent: 'space-around',
         overflow: 'hidden',
         backgroundColor: theme.palette.background.paper,
     },
     gridList: {
         width: '100%',
-        height: 'calc(100vh - 48px)',
+        height: '100%',
     },
     icon: {
         color: 'rgba(255, 255, 255, 0.54)',
@@ -51,34 +51,29 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
         history.push(`/character/${character.id}`);
     }
     const handleQuery = (nameStartsWith: string) => {
-        refetch({ nameStartsWith })        
+        refetch({ nameStartsWith })
     }
     return (
-        <Grid container spacing={0} justify="center">
-            {
-                !smallScreen() && <Grid item sm={12} md={3} lg={3}>
+        <Box boxShadow={3}>
+            <div className={classes.root}>
+                <div>
                     <SearchPanel handleQuery={ handleQuery }/>
-                </Grid>
-            }
-            <Grid item sm={12} md={9} lg={9}>
-                <Box boxShadow={3}>
-                <div className={classes.root}>
-                    <GridList cellHeight={300} spacing={0} cols={getCols()} className={classes.gridList}>
-                        <GridListTile key="Subheader" cols={getCols()} style={{ height: 'auto' }}></GridListTile>
-                        {characterList?.characters.map((character) => (
-                                <GridListTile onClick={() => handleClick(character)} key={ character.id }>
-                                    <img src={avatar(character.thumbnail)} />
-                                    <GridListTileBar
-                                        title={character.name}
-                                    />
-                                </GridListTile>
-                            
-                        ))}
-                    </GridList>
-                </div >
-                </Box>
-            </Grid>
-        </Grid>
+                </div>
+                <GridList cellHeight={300} spacing={0} cols={getCols()} className={classes.gridList}>
+                    <GridListTile key="Subheader" cols={getCols()} style={{ height: 'auto' }}></GridListTile>
+                    {characterList?.characters.map((character) => (
+                        <GridListTile onClick={() => handleClick(character)} key={character.id}>
+                            <img src={avatar(character.thumbnail)} />
+                            <GridListTileBar
+                                title={character.name}
+                            />
+                        </GridListTile>
+
+                    ))}
+                </GridList>
+            </div >
+        </Box>
+
     );
 }
 
