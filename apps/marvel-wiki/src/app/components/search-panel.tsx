@@ -1,7 +1,6 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import { createStyles, debounce, Fab, makeStyles, Theme } from '@material-ui/core';
-import { debounceUtil } from '../utils';
 export interface SearchPanelProps {
     handleQuery: Function
 }
