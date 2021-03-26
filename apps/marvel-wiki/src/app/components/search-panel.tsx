@@ -1,6 +1,7 @@
 import React from 'react';
 import TextField from '@material-ui/core/TextField';
-import { createStyles, Fab, makeStyles, Theme } from '@material-ui/core';
+import { createStyles, debounce, Fab, makeStyles, Theme } from '@material-ui/core';
+import { debounceUtil } from '../utils';
 export interface SearchPanelProps {
     handleQuery: Function
 }
@@ -30,9 +31,18 @@ const SearchPanel: React.SFC<SearchPanelProps> = ({ handleQuery }) => {
     const handleCharacterClick = (char: string) => {
         handleQuery(char)
     }
+    const handleChange = (string: string) => {
+        debounce(() => handleQuery(string), 500)()        
+    }
     return (
         <form noValidate autoComplete="off" className={ classes.root }>
-            <TextField id="outlined-search" label="Search" variant="outlined" fullWidth={true} />
+            <TextField
+                id="outlined-search"
+                label="Search"
+                variant="outlined"
+                fullWidth={true}
+                onChange={ (e) => handleChange(e.target.value) }
+            />
             {
                 getCharacters().map(c => (
                     <Fab size="small" color="secondary" aria-label="add" className={classes.margin} key={ c } onClick={ () => handleCharacterClick(c) }>

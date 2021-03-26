@@ -36,8 +36,9 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
     const matchesXSmall = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesMedium = useMediaQuery(theme.breakpoints.down('md'));
-    const { loading, error, data: characterList, variables } = useQuery(GET_CHARACTERS);
-    console.log(variables)
+    const { loading, error, data: characterList, refetch } = useQuery(GET_CHARACTERS, {
+        fetchPolicy: 'network-only'
+    });
     const avatar = (thumbnail: Avatar): string => `${thumbnail.path}.${thumbnail.extension}`
     const getCols = () => {
         if (matchesXSmall) { return 2; }
@@ -49,8 +50,8 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
     const handleClick = (character) => {
         history.push(`/character/${character.id}`);
     }
-    const handleQuery = (searchText: string) => {
-        console.log(searchText)
+    const handleQuery = (nameStartsWith: string) => {
+        refetch({ nameStartsWith })        
     }
     return (
         <Grid container spacing={0} justify="center">

@@ -3,9 +3,10 @@ import {
   GraphQLList,
   GraphQLSchema,
   GraphQLID,
+  GraphQLString,
 } from "graphql";
 import axios from "axios";
-import { getUrl } from "../helper/url";
+import { getUrl, pruneParams } from "../helper/url";
 import { MarvelApiResponse } from "@marvel-wiki/api-interfaces";
 import { Character } from "./character";
 
@@ -29,9 +30,19 @@ const RootQuery = new GraphQLObjectType({
     },
     characters: {
       type: new GraphQLList(Character),
+      args: {
+        nameStartsWith: { type: GraphQLString },
+      },
       async resolve(parent, args, context) {
         try { 
-          const url = getUrl("characters", { limit: 24 });
+          const nameStartsWith = args.nameStartsWith;
+          const limit = 24;
+          const params = pruneParams({
+            nameStartsWith,
+            limit
+          })
+          console.log(params);
+          const url = getUrl("characters", { ...params });
           const result = await axios.get<MarvelApiResponse>(url);
           const { results, ...metaData } = result.data.data;
           context.res.set('meta-data', JSON.stringify(metaData));

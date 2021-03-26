@@ -16,3 +16,13 @@ export const getUrl = (urlPart: string, params: Params = {}): string => {
     const url = `${baseUrl}/${urlPart}?ts=${ts}&apikey=${publicKey}&hash=${hash}&${qs}`;          
     return url;
 }
+
+
+export const pruneParams = (params) => {
+    return  Object.keys(params).reduce((acc, curr) => {
+        if(params[curr]) {
+            acc[curr] = params[curr];
+        }
+        return acc;
+    }, {})
+}
