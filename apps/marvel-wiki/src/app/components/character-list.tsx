@@ -46,7 +46,6 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
         if (matchesMedium) { return 5; }
         return 6;
     }
-    const smallScreen = () => matchesSmall || matchesXSmall;
     const handleClick = (character) => {
         history.push(`/character/${character.id}`);
     }
@@ -54,26 +53,23 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
         refetch({ nameStartsWith })
     }
     return (
-        <Box boxShadow={3}>
-            <div className={classes.root}>
-                <div>
-                    <SearchPanel handleQuery={ handleQuery }/>
-                </div>
-                <GridList cellHeight={300} spacing={0} cols={getCols()} className={classes.gridList}>
-                    <GridListTile key="Subheader" cols={getCols()} style={{ height: 'auto' }}></GridListTile>
-                    {characterList?.characters.map((character) => (
-                        <GridListTile onClick={() => handleClick(character)} key={character.id}>
-                            <img src={avatar(character.thumbnail)} />
-                            <GridListTileBar
-                                title={character.name}
-                            />
-                        </GridListTile>
+        <div className={classes.root}>
+            <div>
+                <SearchPanel handleQuery={ handleQuery }/>
+            </div>
+            <GridList cellHeight={300} spacing={0} cols={getCols()} className={classes.gridList}>
+                <GridListTile key="Subheader" cols={getCols()} style={{ height: 'auto' }}></GridListTile>
+                {characterList?.characters.map((character) => (
+                    <GridListTile onClick={() => handleClick(character)} key={character.id}>
+                        <img src={avatar(character.thumbnail)} />
+                        <GridListTileBar
+                            title={character.name}
+                        />
+                    </GridListTile>
 
-                    ))}
-                </GridList>
-            </div >
-        </Box>
-
+                ))}
+            </GridList>
+        </div >
     );
 }
 

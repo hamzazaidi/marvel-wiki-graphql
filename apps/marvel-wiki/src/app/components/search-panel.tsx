@@ -39,7 +39,7 @@ const SearchPanel: React.SFC<SearchPanelProps> = ({ handleQuery }) => {
         <form noValidate autoComplete="off" className={ classes.root }>
              <ButtonGroup
                 orientation="vertical"
-                color="primary"
+                color="secondary"
                 aria-label="vertical contained primary button group"
                 variant="text"
             >

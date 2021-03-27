@@ -1,17 +1,16 @@
 
-import { ApolloClient, InMemoryCache, ApolloProvider, ApolloLink, concat, createHttpLink } from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+import { ApolloClient, InMemoryCache, ApolloProvider, ApolloLink, createHttpLink } from '@apollo/client';
 import React from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import amber from '@material-ui/core/colors/amber';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 import Navbar from './components/nav-bar';
 import CharacterList from './components/character-list';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CharacterDetail from './components/character-detail';
 import { primaryColor } from './colors'
 
-const uri = '/graphql';
+const uri = 'http://localhost:3333/graphql';
 const httpLink = createHttpLink({
   uri,
 })
@@ -36,7 +35,7 @@ const theme = createMuiTheme(
       primary: {
         main: primaryColor,
       },
-      secondary: amber,
+      secondary: deepPurple,
     },
   }
 );
