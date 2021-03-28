@@ -5,61 +5,55 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
-import { Grid, makeStyles, Typography } from "@material-ui/core";
+import { Box, Grid, makeStyles, Typography } from "@material-ui/core";
 import { Avatar } from "@marvel-wiki/api-interfaces";
+import { CompassCalibration } from "@material-ui/icons";
 
 export interface ComicListProps {
     comics: any[];
 }
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        maxWidth: 245,
-        maxHeight: 350,
-        minHeight: 350
+    comic: {
+        display: 'flex',
     },
+    image: {
+        width: 175,
+        height: 250,
+        boxShadow: '0px 0px 25px -10px #000',
+        marginRight: theme.spacing(5)
+    },    
 }));
 
 const ComicList: React.SFC<ComicListProps> = ({ comics }) => {
     const classes = useStyles();
     const avatar = (thumbnail: Avatar): string =>
         `${thumbnail.path}.${thumbnail.extension}`;
+    const top3 = () => comics.slice(0, 3)
+    const rest =() => comics.slice(3, comics.length)
     return (
-
-        <Grid
-            container
-            direction="row"
-            justify="flex-start"
-            alignItems="center"
-            spacing={1}
-        >
+        <Grid container>
             {
-                comics.map(comic => (
+                top3().map(comic => (
                     <Grid item xs={12} md={4} key={comic.id}>
-                        <Card className={classes.root}>
-                            <CardActionArea>
-                                <CardMedia
-                                    component="img"
-                                    alt="Contemplative Reptile"
-                                    height="180"
-                                    image={ avatar(comic.thumbnail) }
-                                    title="Contemplative Reptile"
-                                />
-                                <CardContent>
-                                    <Typography gutterBottom variant="subtitle2" component="h2">
-                                        { comic.title }
-                                    </Typography>                                    
-                                </CardContent>
-                            </CardActionArea>
-                            <CardActions>
-                                <Button size="small" color="primary">
-                                    Share
-                                </Button>
-                                <Button size="small" color="primary">
-                                    Learn More
-                                </Button>
-                            </CardActions>
-                        </Card>
+                        <div className={ classes.comic }>
+                            <img className={ classes.image } src={ avatar(comic.thumbnail) } alt=""/>
+                            <Typography variant="h3" component="h2">
+                                { comic.title }
+                            </Typography>
+                        </div>
+                    </Grid>
+                ))
+            }
+             {
+                rest().map(comic => (
+                    <Grid item xs={1} md={1} key={comic.id}>
+                        <div className={ classes.comic }>
+                            <img className={ classes.image } src={ avatar(comic.thumbnail) } alt=""/>
+                            <Typography variant="h3" component="h2">
+                                { comic.title }
+                            </Typography>
+                        </div>
                     </Grid>
                 ))
             }
