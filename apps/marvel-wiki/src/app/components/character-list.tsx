@@ -16,8 +16,7 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         justifyContent: 'space-around',
-        overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
+        overflow: 'hidden',        
     },
     gridList: {
         width: '100%',
