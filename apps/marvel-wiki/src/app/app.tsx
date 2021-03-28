@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CharacterDetail from './components/character-detail';
 import { primaryColor } from './colors'
 
-const uri = 'http://localhost:3333/graphql';
+const uri = '/graphql';
 const httpLink = createHttpLink({
   uri,
 })
@@ -18,7 +18,9 @@ const afterwareLink = new ApolloLink((operation, forward) => {
   return forward(operation).map((response) => {
     const context = operation.getContext()
     const metaData = context.response.headers.get('meta-data')
-    localStorage.setItem('meta-data', metaData)
+    if(localStorage.getItem('topbarSearch') !== 'true' && metaData) {
+      localStorage.setItem('meta-data', metaData)
+    }
     return response
   })
 })

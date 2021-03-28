@@ -5,6 +5,7 @@ import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import logo from '../../assets/logo.png';
 import CharacterAutocomplete from './character-autocomplete';
 import { CssBaseline, Slide, useScrollTrigger } from '@material-ui/core';
+import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -63,7 +64,9 @@ const Navbar = (props: Props) => {
             <HideOnScroll {...props}>
                 <AppBar >
                     <Toolbar className={classes.customizeToolbar}>
-                        <img className={classes.title} src={logo} />
+                        <Link to="/">
+                            <img className={classes.title} src={logo} />
+                        </Link>
                         <div className={classes.search}>
                             <CharacterAutocomplete />
                         </div>

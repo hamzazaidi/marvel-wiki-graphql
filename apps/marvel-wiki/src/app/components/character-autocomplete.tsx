@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { createStyles, Theme, makeStyles } from '@material-ui/core/styles';
 import { Autocomplete } from '@material-ui/lab';
-import { Avatar as AvatarMaterial, CircularProgress, TextField, withStyles } from '@material-ui/core';
+import { Avatar as AvatarMaterial, CircularProgress, debounce, TextField, useMediaQuery, useTheme, withStyles } from '@material-ui/core';
 import { useLazyQuery } from '@apollo/client';
 import { GET_CHARACTERS } from '../queries';
 import { Avatar } from '@marvel-wiki/api-interfaces';
@@ -49,20 +49,24 @@ const CssTextField = withStyles({
 
 const CharacterAutocomplete: React.SFC<CharacterAutocompleteProps> = () => {
     const classes = useStyles();
+    const theme = useTheme();
     const [searchText, setSearchText] = useState('');
     const history = useHistory();
+    const matchesXSmall = useMediaQuery(theme.breakpoints.down('xs'));
+    const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
     const [loadCharacters, { loading, data }] = useLazyQuery(
         GET_CHARACTERS,
         { variables: { nameStartsWith: searchText } }
     );
     useEffect(() => {
         if (searchText) {
+            localStorage.setItem('topbarSearch', 'true');
             loadCharacters();
         }
     }, [searchText]);
-
+    const isSmallScreen = () => matchesSmall || matchesXSmall;    
     const handleChange = (searchText: string) => {
-        setSearchText(searchText);
+        debounce(() => setSearchText(searchText), 1000)();        
     }
     const avatar = (thumbnail: Avatar): string => `${thumbnail.path}.${thumbnail.extension}`
     
@@ -71,7 +75,7 @@ const CharacterAutocomplete: React.SFC<CharacterAutocompleteProps> = () => {
             id="combo-box-demo"
             options={data?.characters || []}
             getOptionLabel={(option: any) => option && option.name}
-            style={{ width: 200 }}
+            style={{ width: isSmallScreen() ? 200 : 300 }}
             loading={loading}
             clearOnBlur
             renderOption={(option) => (

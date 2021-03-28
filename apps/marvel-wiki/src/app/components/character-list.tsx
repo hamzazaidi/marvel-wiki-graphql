@@ -48,8 +48,10 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
         history.push(`/character/${character.id}`);
     }
     const handleQuery = (nameStartsWith: string) => {
+        localStorage.setItem('topbarSearch', 'false')
         refetch({ nameStartsWith })
     }
+    localStorage.setItem('topbarSearch', 'false');
     return (
         <div className={classes.root}>
             <div>
