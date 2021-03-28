@@ -36,9 +36,7 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
     const matchesXSmall = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesMedium = useMediaQuery(theme.breakpoints.down('md'));
-    const { loading, error, data: characterList, refetch } = useQuery(GET_CHARACTERS, {
-        fetchPolicy: 'network-only'
-    });
+    const { loading, error, data: characterList, refetch } = useQuery(GET_CHARACTERS);
     const avatar = (thumbnail: Avatar): string => `${thumbnail.path}.${thumbnail.extension}`
     const getCols = () => {
         if (matchesXSmall) { return 2; }

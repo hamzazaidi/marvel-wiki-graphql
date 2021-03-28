@@ -1,6 +1,5 @@
 import React from 'react';
-import TextField from '@material-ui/core/TextField';
-import { Button, ButtonGroup, createStyles, debounce, Fab, makeStyles, Theme } from '@material-ui/core';
+import { Button, ButtonGroup, createStyles, makeStyles, Theme } from '@material-ui/core';
 export interface SearchPanelProps {
     handleQuery: Function
 }
@@ -32,15 +31,11 @@ const SearchPanel: React.SFC<SearchPanelProps> = ({ handleQuery }) => {
     const handleCharacterClick = (char: string) => {
         handleQuery(char)
     }
-    const handleChange = (string: string) => {
-        debounce(() => handleQuery(string), 500)()        
-    }
     return (
         <form noValidate autoComplete="off" className={ classes.root }>
              <ButtonGroup
                 orientation="vertical"
-                color="secondary"
-                aria-label="vertical contained primary button group"
+                color="secondary"                
                 variant="text"
             >
             {
