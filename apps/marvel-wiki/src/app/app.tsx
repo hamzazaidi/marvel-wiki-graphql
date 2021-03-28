@@ -40,6 +40,9 @@ const theme = createMuiTheme(
       },
       secondary: deepPurple,
     },
+    typography: {
+      fontFamily: 'Ropa Sans'
+    },
   }
 );
 

@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useHistory } from "react-router-dom";
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
+import Zoom from '@material-ui/core/Zoom';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -59,13 +58,14 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
             <GridList cellHeight={300} spacing={0} cols={getCols()} className={classes.gridList}>
                 <GridListTile key="Subheader" cols={getCols()} style={{ height: 'auto' }}></GridListTile>
                 {characterList?.characters.map((character) => (
-                    <GridListTile onClick={() => handleClick(character)} key={character.id}>
-                        <img src={avatar(character.thumbnail)} />
-                        <GridListTileBar
-                            title={character.name}
-                        />
-                    </GridListTile>
-
+                    <Zoom in={!!character} key={character.id}>
+                        <GridListTile onClick={() => handleClick(character)} >                            
+                                <img src={avatar(character.thumbnail)} />
+                                <GridListTileBar
+                                    title={character.name}
+                                />                        
+                        </GridListTile>
+                    </Zoom>
                 ))}
             </GridList>
         </div >

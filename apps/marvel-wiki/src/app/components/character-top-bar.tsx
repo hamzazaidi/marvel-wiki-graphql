@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar as AvatarImg, makeStyles, Typography } from "@material-ui/core";
+import { Avatar as AvatarImg, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import { primaryColor } from "../colors";
 import { Avatar } from "@marvel-wiki/api-interfaces";
 import Banner from '../../assets/marvel_banner.jpeg';
@@ -17,24 +17,39 @@ const useStyles = makeStyles((theme) => ({
     background: {
         backgroundImage: `url(${Banner})`,
         height: 250,
-        filter: 'grayscale(.7)'
+        filter: 'grayscale(.7)',
+        transition: 'filter 1s ease',
+        boxShadow: '0px 0px 25px -10px #FFF',
+        '&:hover': {
+            filter: 'grayscale(0)'
+        }
     },
     profile: {
         position: 'absolute',
         bottom: '-38%',
         left: '50%',
-        transform: 'translateX(-50%)'
+        transform: 'translateX(-50%)',
+        width: 'auto'
     },
     avatar: {
         alignSelf: "center",
-        width: 300,
-        height: 300,
+        width: 250,
+        height: 250,
+        border: '2px solid #FFF',
+        boxShadow: '0px 0px 25px -10px #FFF',
+        margin: 'auto'
     },
 }));
 const CharacterTopBar: React.SFC<CharacterTopBarProps> = ({ name, thumbnail }) => {
     const classes = useStyles();
+    const theme = useTheme();
     const avatar = (thumbnail: Avatar): string =>
         `${thumbnail.path}.${thumbnail.extension}`;
+    const matchesXSmall = useMediaQuery(theme.breakpoints.down('xs'));
+    const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
+    const smallScreen = () => matchesSmall || matchesXSmall ? {
+        width: 200, height: 200
+    }: {};  
     return (
         <div className={classes.topbar}>
             <div className={classes.background}></div>
@@ -42,9 +57,10 @@ const CharacterTopBar: React.SFC<CharacterTopBarProps> = ({ name, thumbnail }) =
                 <AvatarImg
                     alt={name}
                     src={avatar(thumbnail)}
+                    style={{ ...smallScreen() }}
                     className={classes.avatar}
                 />
-                <Typography align="center" component="h2" color="textPrimary">
+                <Typography align="center" variant="h4" component="h1" color="secondary">
                     {name}
                 </Typography>
             </div>

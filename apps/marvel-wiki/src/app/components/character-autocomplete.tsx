@@ -75,7 +75,7 @@ const CharacterAutocomplete: React.SFC<CharacterAutocompleteProps> = () => {
             id="combo-box-demo"
             options={data?.characters || []}
             getOptionLabel={(option: any) => option && option.name}
-            style={{ width: isSmallScreen() ? 200 : 300 }}
+            style={{ width: isSmallScreen() ? 170 : 300 }}
             loading={loading}
             clearOnBlur
             renderOption={(option) => (
