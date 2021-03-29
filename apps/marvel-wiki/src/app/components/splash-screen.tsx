@@ -34,7 +34,7 @@ const useStyles =  makeStyles(theme => ({
             },
             '100%': {
                 opacity: 1,
-                fontSize: '30vh',
+                fontSize: '17vh',
                 color: 'rgba(255,255,255,1)',
                 '-webkit-text-stroke-color': 'transparent'
             }
@@ -78,7 +78,7 @@ const useStyles =  makeStyles(theme => ({
             backgroundSize: 'cover',
             zIndex: 1,
             transform: 'scale(1.8)',
-            animation: `$hideBg 9s ease 0s forwards`
+            animation: `$hideBg 7s ease 0s forwards`
         }
     },
 }));
@@ -96,7 +96,7 @@ const SplashScreen: React.SFC<SplashScreenProps> = () => {
 
         setTimeout(() => {
             clearInterval(interval);
-        }, 9000)
+        }, 7000)
     })
 
     return (
