@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",
+        marginBottom: theme.spacing(15),               
     },
     background: {
         backgroundImage: `url(${Banner})`,

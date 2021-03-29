@@ -15,9 +15,7 @@ export interface ComicListProps {
 }
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        marginTop: theme.spacing(8),               
-    },
+    root: {},
     container: {
         overflowX: 'auto',        
         padding: theme.spacing(5),
