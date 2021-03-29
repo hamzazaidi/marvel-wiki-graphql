@@ -1,6 +1,6 @@
 
 import { ApolloClient, InMemoryCache, ApolloProvider, ApolloLink, createHttpLink } from '@apollo/client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import deepPurple from '@material-ui/core/colors/deepPurple';
@@ -9,6 +9,7 @@ import CharacterList from './components/character-list';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import CharacterDetail from './components/character-detail';
 import { primaryColor } from './colors'
+import SplashScreen from './components/splash-screen';
 
 const uri = '/graphql';
 const httpLink = createHttpLink({
@@ -54,18 +55,25 @@ const useStyles = makeStyles((theme) => ({
 
 export const App = () => {
   const classes = useStyles();
+  const [ loader, setLoader ] = useState(true);
+  useEffect(() => {
+    setTimeout(() => setLoader(false) , 7000);
+  })
   return (
     <ThemeProvider theme={theme}>
       <ApolloProvider client={client}>
-        <Router>
-          <Navbar />
-          <div className={ classes.content }>
-            <Switch>
-              <Route exact path="/" component={CharacterList} />
-              <Route path="/character/:id" component={CharacterDetail} />
-            </Switch>
-          </div>
-        </Router>
+        { loader && <SplashScreen /> }
+        { 
+          !loader && <Router>
+            <Navbar />
+            <div className={ classes.content }>
+              <Switch>
+                <Route exact path="/" component={CharacterList} />
+                <Route path="/character/:id" component={CharacterDetail} />
+              </Switch>
+            </div>
+          </Router>
+        }
       </ApolloProvider>
     </ThemeProvider>
   );
