@@ -42,7 +42,7 @@ const theme = createMuiTheme(
       secondary: deepPurple,
     },
     typography: {
-      fontFamily: 'Bebas Neue'
+      fontFamily: 'Roboto Condensed'
     },
   }
 );
