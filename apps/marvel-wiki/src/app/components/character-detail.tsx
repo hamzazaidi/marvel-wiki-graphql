@@ -10,9 +10,7 @@ export interface CharacterDetailProps { }
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            flexGrow: 1,
-            paddingLeft: theme.spacing(2),
-            paddingRight: theme.spacing(2)
+            flexGrow: 1
         }
     }),
 );

@@ -26,6 +26,14 @@ const GET_CHARACTER = gql`
         id
         title
         description
+        pageCount
+        textObjects{
+          text
+        }
+        prices{
+          type
+          price
+        }
         thumbnail {
           path
           extension

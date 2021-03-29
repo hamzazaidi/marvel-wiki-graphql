@@ -60,7 +60,7 @@ const CharacterTopBar: React.SFC<CharacterTopBarProps> = ({ name, thumbnail }) =
                     style={{ ...smallScreen() }}
                     className={classes.avatar}
                 />
-                <Typography align="center" variant="h4" component="h1" color="secondary">
+                <Typography align="center" variant="h4" component="h1" color="primary">
                     {name}
                 </Typography>
             </div>
