@@ -13,6 +13,9 @@ import Ten from '../../assets/splash/10.jpeg';
 import Eleven from '../../assets/splash/11.jpeg';
 import Twelve from '../../assets/splash/12.jpeg';
 import Thirteen from '../../assets/splash/13.jpeg';
+import Fourteen from '../../assets/splash/14.jpeg';
+import Fifteen from '../../assets/splash/15.jpeg';
+import Sixteen from '../../assets/splash/16.jpeg';
 export interface SplashScreenProps {}
 const useStyles =  makeStyles(theme => ({
     '@global':{ 
@@ -75,7 +78,8 @@ const useStyles =  makeStyles(theme => ({
             left: 0,
             opacity: 1,
             backgroundAttachment: 'fixed',
-            backgroundSize: 'cover',
+            backgroundSize: 'contain',
+            backgroundRepeat: 'no-repea',
             zIndex: 1,
             transform: 'scale(1.8)',
             animation: `$hideBg 7s ease 0s forwards`
@@ -85,14 +89,14 @@ const useStyles =  makeStyles(theme => ({
 const SplashScreen: React.SFC<SplashScreenProps> = () => {
     const classes = useStyles();
     let bgNum = 0;
-    const images = [One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Eleven, Twelve, Thirteen];
+    const images = [One, Two, Three, Four, Five, Six, Seven, Eight, Nine, Ten, Eleven, Twelve, Thirteen, Fourteen, Fifteen, Sixteen];
     const [ image, setImage ] = useState(images[0])
 
     useEffect(() => {
         const interval = setInterval(() => {
-            bgNum = (bgNum % 13) + 1;
+            bgNum = Math.floor(Math.random() * 15) + 1;
             setImage(images[bgNum]);
-        }, 330);
+        }, 130);
 
         setTimeout(() => {
             clearInterval(interval);
