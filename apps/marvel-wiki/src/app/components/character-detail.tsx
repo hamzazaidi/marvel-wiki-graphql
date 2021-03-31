@@ -6,6 +6,7 @@ import CharacterTopBar from "./character-top-bar";
 import CharacterDescription from "./character-description";
 import ComicList from "./comic-list";
 import { createStyles, Grid, makeStyles, Theme } from "@material-ui/core";
+import EventList from "./event-list";
 export interface CharacterDetailProps { }
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -30,6 +31,7 @@ const CharacterDetail: React.SFC<CharacterDetailProps> = () => {
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={12} md={12} lg={12}>
                                 <CharacterDescription description={data.character.description} />            
+                                <EventList events={ data.character.events }/>
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12}>
                                 <ComicList comics={data.character.comics} />      

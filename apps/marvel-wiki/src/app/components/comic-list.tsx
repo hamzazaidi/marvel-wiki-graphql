@@ -51,24 +51,28 @@ const ComicList: React.SFC<ComicListProps> = ({ comics }) => {
     }
     return (
         <div className={ classes.root }>
-            <div className={ classes.comicHeader }>
-                <Typography variant="h3" component="h2">Featured</Typography>
-                <Typography variant="body1" component="h2" color="textSecondary">comic books we love</Typography>
-            </div>
-            <Grid container wrap="nowrap" className={ classes.container }>
-                {
-                    comics.map(comic => (
-                        <Grid item key={comic.id}>
-                            <div className={ classes.comic }>
-                                <img className={ classes.image } style={{ ...imageSize() }} src={ avatar(comic.thumbnail) } alt=""/>
-                                <Typography variant="h6" component="h2">
-                                    { comic.title }                                    
-                                </Typography>                                
-                            </div>
-                        </Grid>
-                    ))
-                }             
-            </Grid>
+            {
+                !!comics.length && <div className={ classes.comicHeader }>
+                    <Typography variant="h3" component="h2">Featured</Typography>
+                    <Typography variant="body1" component="h2" color="textSecondary">comic books we love</Typography>
+                </div>
+            }   
+            {    
+                !!comics.length && <Grid container wrap="nowrap" className={ classes.container }>
+                    {
+                        comics.map(comic => (
+                            <Grid item key={comic.id}>
+                                <div className={ classes.comic }>
+                                    <img className={ classes.image } style={{ ...imageSize() }} src={ avatar(comic.thumbnail) } alt=""/>
+                                    <Typography variant="h6" component="h2">
+                                        { comic.title }                                    
+                                    </Typography>                                
+                                </div>
+                            </Grid>
+                        ))
+                    }             
+                </Grid>
+            }
         </div>
     );
 }

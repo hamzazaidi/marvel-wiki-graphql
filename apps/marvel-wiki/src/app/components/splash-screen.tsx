@@ -67,7 +67,7 @@ const useStyles =  makeStyles(theme => ({
             color: 'transparent',
             fontSize: '205vh',
             '-webkit-text-stroke': '2px #000',
-            letterSpacing: '-2vh',
+            letterSpacing: '-1vh',
             animation: `$marvel 6s ease 2s forwards`
         },
         '& #bg': {

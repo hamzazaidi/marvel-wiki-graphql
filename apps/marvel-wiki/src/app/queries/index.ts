@@ -22,6 +22,17 @@ const GET_CHARACTER = gql`
         path
         extension
       }
+      events {
+        id
+       title
+       description
+       start
+       end
+       thumbnail{
+         path
+         extension
+       }
+      }  
       comics {
         id
         title

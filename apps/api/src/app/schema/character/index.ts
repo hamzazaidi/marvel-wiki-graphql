@@ -35,10 +35,10 @@ export const Character = new GraphQLObjectType({
       },
     },
     events: {
-      type: new GraphQLList(Series),
+      type: new GraphQLList(Event),
       async resolve(parent, args) {
         try {
-          const url = getUrl(`characters/${parent.id}/series`);
+          const url = getUrl(`characters/${parent.id}/events`);
           const result = await axios.get<MarvelApiResponse>(url);
           return result.data.data.results;
         } catch (error) {
@@ -47,10 +47,10 @@ export const Character = new GraphQLObjectType({
       },
     },
     series: {
-      type: new GraphQLList(Event),
+      type: new GraphQLList(Series),
       async resolve(parent, args) {
         try {
-          const url = getUrl(`characters/${parent.id}/events`);
+          const url = getUrl(`characters/${parent.id}/series`);
           const result = await axios.get<MarvelApiResponse>(url);
           return result.data.data.results;
         } catch (error) {
