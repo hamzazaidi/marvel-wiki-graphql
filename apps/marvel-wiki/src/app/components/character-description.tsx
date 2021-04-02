@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
     description: {
         display: "flex",
         justifyContent: "center",
+        margin: theme.spacing(2)
     },
     descriptionCard: {
         maxWidth: 500,

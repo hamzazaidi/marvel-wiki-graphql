@@ -6,6 +6,7 @@ import { Avatar as AvatarMaterial, CircularProgress, debounce, TextField, useMed
 import { useLazyQuery } from '@apollo/client';
 import { GET_CHARACTERS } from '../queries';
 import { Avatar } from '@marvel-wiki/api-interfaces';
+import { avatar } from '../util';
 export interface CharacterAutocompleteProps {
 
 }
@@ -68,7 +69,6 @@ const CharacterAutocomplete: React.SFC<CharacterAutocompleteProps> = () => {
     const handleChange = (searchText: string) => {
         debounce(() => setSearchText(searchText), 1000)();        
     }
-    const avatar = (thumbnail: Avatar): string => `${thumbnail.path}.${thumbnail.extension}`
     
     return (
         <Autocomplete

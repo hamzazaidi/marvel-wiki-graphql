@@ -10,6 +10,7 @@ import { Avatar } from '@marvel-wiki/api-interfaces';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { GET_CHARACTERS } from '../queries'
 import SearchPanel from './search-panel';
+import { avatar } from '../util';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -35,7 +36,6 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
     const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
     const matchesMedium = useMediaQuery(theme.breakpoints.down('md'));
     const { loading, error, data: characterList, refetch } = useQuery(GET_CHARACTERS);
-    const avatar = (thumbnail: Avatar): string => `${thumbnail.path}.${thumbnail.extension}`
     const getCols = () => {
         if (matchesXSmall) { return 2; }
         if (matchesSmall) { return 3; }

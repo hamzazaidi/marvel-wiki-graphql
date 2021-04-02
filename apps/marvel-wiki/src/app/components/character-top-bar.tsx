@@ -3,6 +3,7 @@ import { Avatar as AvatarImg, makeStyles, Typography, useMediaQuery, useTheme } 
 import { primaryColor } from "../colors";
 import { Avatar } from "@marvel-wiki/api-interfaces";
 import Banner from '../../assets/marvel_banner.jpeg';
+import { avatar } from "../util";
 export interface CharacterTopBarProps {
     name: string;
     thumbnail: Avatar;
@@ -44,8 +45,6 @@ const useStyles = makeStyles((theme) => ({
 const CharacterTopBar: React.SFC<CharacterTopBarProps> = ({ name, thumbnail }) => {
     const classes = useStyles();
     const theme = useTheme();
-    const avatar = (thumbnail: Avatar): string =>
-        `${thumbnail.path}.${thumbnail.extension}`;
     const matchesXSmall = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
     const smallScreen = () => matchesSmall || matchesXSmall ? {

@@ -9,6 +9,7 @@ import { Avatar as AvatarMateial, Box, Grid, makeStyles, Typography, useMediaQue
 import { Avatar } from "@marvel-wiki/api-interfaces";
 import { CompassCalibration } from "@material-ui/icons";
 import { AvatarGroup } from "@material-ui/lab";
+import { avatar } from "../util";
 
 export interface ComicListProps {
     comics: any[];
@@ -41,19 +42,18 @@ const ComicList: React.SFC<ComicListProps> = ({ comics }) => {
     const theme = useTheme();
     const matchesXSmall = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
-    const avatar = (thumbnail: Avatar): string =>
-        `${thumbnail.path}.${thumbnail.extension}`;
     const imageSize = () => {
         if(matchesXSmall || matchesSmall) {
             return { width: 100, height: 150 };
         }
         return {width: 200, height: 250 }
     }
+    const isSmallScreen = () => matchesSmall || matchesXSmall;
     return (
         <div className={ classes.root }>
             {
                 !!comics.length && <div className={ classes.comicHeader }>
-                    <Typography variant="h3" component="h2">Featured</Typography>
+                    <Typography variant={ isSmallScreen() ? 'h5' : 'h3' } component="h2">Featured</Typography>
                     <Typography variant="body1" component="h2" color="textSecondary">comic books we love</Typography>
                 </div>
             }   
