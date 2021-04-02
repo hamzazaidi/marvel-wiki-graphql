@@ -2,11 +2,11 @@ import React from "react";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { GET_CHARACTER } from "../queries";
-import CharacterTopBar from "./character-top-bar";
-import CharacterDescription from "./character-description";
-import ComicList from "./comic-list";
+import CharacterTopBar from "../components/character-top-bar";
+import CharacterDescription from "../components/character-description";
+import ComicList from "../components/comic-list";
 import { createStyles, Grid, makeStyles, Theme } from "@material-ui/core";
-import EventList from "./event-list";
+import EventList from "../components/event-list";
 export interface CharacterDetailProps { }
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

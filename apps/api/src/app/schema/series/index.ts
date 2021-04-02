@@ -5,7 +5,7 @@ import {
   GraphQLList,
   GraphQLInt,
 } from "graphql";
-import { Avatar, Url } from "../shared";
+import { Avatar, Creators, EntityCharacters, Url } from "../shared";
 
 export const SeriesSummary = new GraphQLObjectType({
   name: "SeriesSummary",
@@ -30,5 +30,7 @@ export const Series = new GraphQLObjectType({
     thumbnail: { type: Avatar },
     next: { type: SeriesSummary },
     previous: { type: SeriesSummary },
+    creators: { type: Creators },
+    characters: { type: EntityCharacters }
   }),
 });

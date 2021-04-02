@@ -1,10 +1,10 @@
-import { Avatar } from "@marvel-wiki/api-interfaces";
-import { createStyles, makeStyles, Theme, Typography, useMediaQuery, useTheme } from "@material-ui/core";
+import {createStyles, makeStyles, Theme, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import React, { useState } from "react";
 import { avatar } from "../util";
+import EventDetail from "./event-detail";
 export interface EventListProps {
   events: any[];
   name: string;
@@ -49,29 +49,7 @@ const useStyles = makeStyles((theme: Theme) =>
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-    },
-    paper: {
-      backgroundColor: theme.palette.background.paper,
-      border: '2px solid #000',
-      boxShadow: theme.shadows[5],
-      display: 'flex'
-    },
-    modalImage: {
-      width: 500,
-      height: 450
-    },
-    modalImageSmall: {
-      width: 335,
-      height: 375
-    },
-    modalContent: {
-      margin: theme.spacing(2),
-      '& .MuiTypography-body1': {
-        maxWidth: 300,
-        display: 'inline-block',
-        fontStyle: 'italic'
-      }
-    }   
+    }
   }),
 );
 
@@ -90,29 +68,27 @@ const EventList: React.SFC<EventListProps> = ({ events, name }) => {
     setOpen(false);
     setSelectedEvent(null);
   };
-  const getFullYear = (dateStr: string) => {
-    const date = new Date(dateStr);
-    return date.getFullYear();
-  } 
   const isSmallScreen = () => matchesSmall || matchesXSmall;
   return (
     <div>
       {
         !!events.length && <div className={classes.eventHeader}>
-          <Typography variant={ isSmallScreen() ? 'h5' : 'h3' } component="h2">Major events { name } was part of...</Typography>
+          <Typography variant={isSmallScreen() ? 'h5' : 'h3'} component="h2">
+            Major events <Typography variant={isSmallScreen() ? 'h5' : 'h3'} component="span" color="textSecondary">{name}</Typography> was part of...
+          </Typography>
           <Typography variant="body1" component="h2" color="textSecondary">how this marvel character involved in the event</Typography>
         </div>
       }
       <article className={classes.root}>
-        <div className={classes.gridContiner} style={{ columnWidth: isSmallScreen() ? '100px' : '200px'  }}>
+        <div className={classes.gridContiner} style={{ columnWidth: isSmallScreen() ? '100px' : '200px' }}>
           {
             events.map(event => (
-              <div className={classes.panel} key={event.id} onClick={ () => handleOpen(event.id) }>
+              <div className={classes.panel} key={event.id} onClick={() => handleOpen(event.id)}>
                 <img
                   className={classes.image}
-                  src={avatar(event.thumbnail)}                  
+                  src={avatar(event.thumbnail)}
                   alt=""
-                />                
+                />
                 <p className={classes.paragraph}>{event.title}</p>
               </div>
             ))
@@ -132,21 +108,7 @@ const EventList: React.SFC<EventListProps> = ({ events, name }) => {
         }}
       >
         <div>
-          {
-            selectedEvent && 
-            <div className={classes.paper} style={{ flexDirection: isSmallScreen() ? 'column': 'row' }}>
-              <img src={avatar(selectedEvent.thumbnail)} alt="" className={  isSmallScreen() ? classes.modalImageSmall : classes.modalImage } />
-              <div className={ classes.modalContent }>
-                <Typography variant={ isSmallScreen() ? 'h5' : 'h3' } component="h2">{ selectedEvent.title }</Typography>
-                <Typography variant="body2" component="div" color="primary">
-                    { getFullYear(selectedEvent.start) } - { getFullYear(selectedEvent.end) }  
-                </Typography>                
-                <Typography variant="body1" component="span" color="textSecondary">
-                  { selectedEvent.description }
-                </Typography>
-              </div>
-            </div>
-          }
+          { selectedEvent && <EventDetail event={ selectedEvent }/> }
         </div>
       </Modal>
     </div>

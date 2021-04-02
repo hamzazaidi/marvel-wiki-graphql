@@ -6,11 +6,10 @@ import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import { useQuery } from '@apollo/client';
-import { Avatar } from '@marvel-wiki/api-interfaces';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { GET_CHARACTERS } from '../queries'
-import SearchPanel from './search-panel';
-import { avatar } from '../util';
+import SearchPanel from '../components/search-panel';
+import { avatar } from '../utils';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',

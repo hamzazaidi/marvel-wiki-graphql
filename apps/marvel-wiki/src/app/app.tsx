@@ -5,9 +5,9 @@ import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import Navbar from './components/nav-bar';
-import CharacterList from './components/character-list';
+import CharacterList from './routes/character-list';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import CharacterDetail from './components/character-detail';
+import CharacterDetail from './routes/character-detail';
 import { primaryColor } from './colors'
 import SplashScreen from './components/splash-screen';
 

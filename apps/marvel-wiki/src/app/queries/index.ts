@@ -24,14 +24,34 @@ const GET_CHARACTER = gql`
       }
       events {
         id
-       title
-       description
-       start
-       end
-       thumbnail{
-         path
-         extension
-       }
+        title
+        description
+        start
+        end
+        thumbnail {
+          path
+          extension
+        }
+        next {
+          name
+        }
+        previous{
+          name
+        }
+        creators {
+          available
+          items {
+            name
+            role
+          }
+        }
+        characters {
+          available
+          items {
+            resourceURI
+            name
+          }
+        }
       }  
       comics {
         id
@@ -60,6 +80,6 @@ const GET_CHARACTER = gql`
 
 
 export {
-    GET_CHARACTERS,
-    GET_CHARACTER
+  GET_CHARACTERS,
+  GET_CHARACTER
 }

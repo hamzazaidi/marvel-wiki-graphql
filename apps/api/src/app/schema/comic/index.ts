@@ -5,7 +5,7 @@ import {
   GraphQLString,
   GraphQLList,
 } from "graphql";
-import { Avatar, TextObject, Url } from "../shared";
+import { Avatar, Creators, EntityCharacters, TextObject, Url } from "../shared";
 
 export const ComicSummary = new GraphQLObjectType({
   name: "ComicSummary",
@@ -48,5 +48,7 @@ export const Comic = new GraphQLObjectType({
     prices: { type: new GraphQLList(ComicPrice) },
     thumbnail: { type: Avatar },
     images: { type: new GraphQLList(Avatar) },
+    creators: { type: Creators },
+    characters: { type: EntityCharacters }
   }),
 });

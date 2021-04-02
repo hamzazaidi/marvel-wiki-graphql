@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
     },
     avatar: {
         alignSelf: "center",
-        width: 250,
-        height: 250,
+        width: 300,
+        height: 300,
         border: '2px solid #FFF',
         boxShadow: '0px 0px 25px -10px #FFF',
         margin: 'auto'
