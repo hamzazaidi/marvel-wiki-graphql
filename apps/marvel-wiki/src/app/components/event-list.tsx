@@ -1,7 +1,6 @@
 import {createStyles, makeStyles, Theme, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
-import Fade from '@material-ui/core/Fade';
 import React, { useState } from "react";
 import { avatar } from "../utils";
 import EventDetail from "./event-detail";

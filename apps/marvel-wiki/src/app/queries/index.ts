@@ -73,6 +73,19 @@ const GET_CHARACTER = gql`
           path
           extension
         }
+        creators {
+          items {
+            name
+            role
+          }
+        },
+        characters {
+          available
+          items {
+            resourceURI
+            name
+          }
+        }
       }
     }
   }

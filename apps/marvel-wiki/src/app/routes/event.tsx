@@ -10,7 +10,7 @@ const Event: React.SFC<EventProps> = ({ events }) => {
     const event = events.find(e => e.id === eventId)
     return (
         <div>
-            <EventDetail event={ event } inModal={false} />
+            <EventDetail event={ event } inModal={false} nextEvent={()=>{}} previousEvent={() => {}}/>
         </div>
     );
 }
