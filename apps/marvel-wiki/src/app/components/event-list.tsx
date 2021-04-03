@@ -3,7 +3,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import React, { useState } from "react";
-import { avatar } from "../util";
+import { avatar } from "../utils";
 import EventDetail from "./event-detail";
 export interface EventListProps {
   events: any[];
@@ -108,7 +108,7 @@ const EventList: React.SFC<EventListProps> = ({ events, name }) => {
         }}
       >
         <div>
-          { selectedEvent && <EventDetail event={ selectedEvent }/> }
+          { selectedEvent && <EventDetail event={ selectedEvent } inModal={ true }/> }
         </div>
       </Modal>
     </div>

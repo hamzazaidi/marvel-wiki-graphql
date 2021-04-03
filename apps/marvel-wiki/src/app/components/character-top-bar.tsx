@@ -3,7 +3,7 @@ import { Avatar as AvatarImg, makeStyles, Typography, useMediaQuery, useTheme } 
 import { primaryColor } from "../colors";
 import { Avatar } from "@marvel-wiki/api-interfaces";
 import Banner from '../../assets/marvel_banner.jpeg';
-import { avatar } from "../util";
+import { avatar } from "../utils";
 export interface CharacterTopBarProps {
     name: string;
     thumbnail: Avatar;

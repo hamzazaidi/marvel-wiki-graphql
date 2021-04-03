@@ -7,7 +7,7 @@ import deepPurple from '@material-ui/core/colors/deepPurple';
 import Navbar from './components/nav-bar';
 import CharacterList from './routes/character-list';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import CharacterDetail from './routes/character-detail';
+import Character from './routes/character';
 import { primaryColor } from './colors'
 import SplashScreen from './components/splash-screen';
 
@@ -69,7 +69,7 @@ export const App = () => {
             <div className={ classes.content }>
               <Switch>
                 <Route exact path="/" component={CharacterList} />
-                <Route path="/character/:id" component={CharacterDetail} />
+                <Route path="/character/:id" component={Character} />
               </Switch>
             </div>
           </Router>

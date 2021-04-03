@@ -6,7 +6,7 @@ import { Avatar as AvatarMaterial, CircularProgress, debounce, TextField, useMed
 import { useLazyQuery } from '@apollo/client';
 import { GET_CHARACTERS } from '../queries';
 import { Avatar } from '@marvel-wiki/api-interfaces';
-import { avatar } from '../util';
+import { avatar } from '../utils';
 export interface CharacterAutocompleteProps {
 
 }
@@ -107,7 +107,7 @@ const CharacterAutocomplete: React.SFC<CharacterAutocompleteProps> = () => {
                 />
             )}
             onChange={(event, value) =>
-                history.push(`/character/${value.id}`)
+                history.push(`/character/${value.id}/details`)
             }
         />
     );

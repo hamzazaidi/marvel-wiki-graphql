@@ -9,7 +9,7 @@ import { Avatar as AvatarMateial, Box, Grid, makeStyles, Typography, useMediaQue
 import { Avatar } from "@marvel-wiki/api-interfaces";
 import { CompassCalibration } from "@material-ui/icons";
 import { AvatarGroup } from "@material-ui/lab";
-import { avatar } from "../util";
+import { avatar } from "../utils";
 
 export interface ComicListProps {
     comics: any[];

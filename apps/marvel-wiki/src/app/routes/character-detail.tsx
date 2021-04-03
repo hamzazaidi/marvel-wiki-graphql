@@ -1,13 +1,11 @@
 import React from "react";
-import { useQuery } from "@apollo/client";
-import { useParams } from "react-router-dom";
-import { GET_CHARACTER } from "../queries";
-import CharacterTopBar from "../components/character-top-bar";
 import CharacterDescription from "../components/character-description";
 import ComicList from "../components/comic-list";
 import { createStyles, Grid, makeStyles, Theme } from "@material-ui/core";
 import EventList from "../components/event-list";
-export interface CharacterDetailProps { }
+export interface CharacterDetailProps {
+    character: any;
+}
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -16,27 +14,22 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const CharacterDetail: React.SFC<CharacterDetailProps> = () => {
-    const { id } = useParams();
+const CharacterDetail: React.SFC<CharacterDetailProps> = ({ character }) => {
     const classes = useStyles();
-    const { loading, error, data } = useQuery(GET_CHARACTER, {
-        variables: { id },
-    });
     return (
         <div>
-            {data && (
+            {character && (
                 <div>
-                    <CharacterTopBar name={data.character.name} thumbnail={data.character.thumbnail} />
                     <div className={classes.root}>
                         <Grid container spacing={3}>
                             <Grid item xs={12} sm={12} md={12} lg={12}>
-                                <CharacterDescription description={data.character.description} />            
+                                <CharacterDescription description={character.character.description} />            
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12}>
-                                <EventList events={ data.character.events } name={ data.character.name }/>
+                                <EventList events={ character.character.events } name={ character.character.name }/>
                             </Grid>                            
                             <Grid item xs={12} sm={12} md={12} lg={12}>
-                                <ComicList comics={data.character.comics} />      
+                                <ComicList comics={character.character.comics} />      
                             </Grid>                            
                         </Grid>
                     </div>
