@@ -1,16 +1,43 @@
-import { Avatar, Button, Card, CardContent, Chip, createStyles, Divider, List, ListItem, ListItemText, makeStyles, Theme, Tooltip, Typography, useMediaQuery, useTheme } from "@material-ui/core";
+import { Avatar, Box, Button, Chip, createStyles, Divider, IconButton, makeStyles, Theme, Tooltip, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import React from "react";
+import ChevronLeft from '@material-ui/icons/ChevronLeft';
+import ChevronRight from '@material-ui/icons/ChevronRight';
 import { useHistory } from "react-router-dom";
 import { avatar, getIdFromUri } from "../utils";
 export interface EventDetailProps {
   event: any;
-  inModal: boolean
+  inModal: boolean;
+  nextEvent: Function;
+  previousEvent: Function;
 }
 
 const useStyles = (inModal) => makeStyles((theme: Theme) =>
   createStyles({
     paper: {
-      display: 'flex'
+      position: 'relative',
+      display: 'flex',
+      '&:hover': {
+        '& .MuiIconButton-root': {
+          opacity: 1,
+          transform: 'translateY(-50%)',
+        }
+      }
+    },
+    buttonLeft: {
+      position: 'absolute',
+      left: 0,
+      top: '50%',
+      transform: 'translateY(-35%)',
+      transition: 'all 500ms ease',
+      opacity: 0
+    },
+    buttonRight: {
+      position: 'absolute',
+      right: 0,
+      top: '50%',
+      transform: 'translateY(-35%)',
+      transition: 'all 500ms ease',
+      opacity: 0
     },
     modalContent: {
       margin: theme.spacing(2),
@@ -45,7 +72,7 @@ const useStyles = (inModal) => makeStyles((theme: Theme) =>
 );
 
 
-const EventDetail: React.SFC<EventDetailProps> = ({ event, inModal }) => {
+const EventDetail: React.SFC<EventDetailProps> = ({ event, inModal, nextEvent, previousEvent }) => {
   const classes = useStyles(inModal)();
   const theme = useTheme();
   const history = useHistory();
@@ -88,6 +115,20 @@ const EventDetail: React.SFC<EventDetailProps> = ({ event, inModal }) => {
         flexDirection: isSmallScreen() ? 'column' : 'row',
         ...paperStyles()
       }}>
+      <IconButton
+        color="secondary"
+        className={classes.buttonLeft}
+        onClick={ () => nextEvent() }
+      >
+        <ChevronLeft fontSize="large"/>
+      </IconButton>
+      <IconButton
+        color="secondary"
+        className={classes.buttonRight}
+        onClick={ () => previousEvent() }
+      >
+        <ChevronRight fontSize="large"/>
+      </IconButton>
       <img src={avatar(event.thumbnail)} alt="" style={{ ...thumbnailImage() }} />
       <div className={classes.modalContent}>
         <Typography variant={isSmallScreen() ? 'h5' : 'h3'} component="h2">{event.title}</Typography>
@@ -103,7 +144,7 @@ const EventDetail: React.SFC<EventDetailProps> = ({ event, inModal }) => {
             Event happen previously:
           </Typography>
           <Typography variant="caption" component="span" color="textSecondary">
-            {event.previous.name}
+            <Box component="span" ml={1}>{event.previous.name}</Box>
           </Typography>
         </div>
         <div>
@@ -111,7 +152,7 @@ const EventDetail: React.SFC<EventDetailProps> = ({ event, inModal }) => {
             Event happen next:
             </Typography>
           <Typography variant="caption" component="span" color="textSecondary">
-            {event.next.name}
+            <Box component="span" ml={1}>{event.next.name}</Box>
           </Typography>
         </div>
         {
@@ -142,7 +183,7 @@ const EventDetail: React.SFC<EventDetailProps> = ({ event, inModal }) => {
             <div className={classes.itemList}>
               {
                 event.creators.items.map((creator, index) => (
-                  <Tooltip title={ creator.role } key={index}>
+                  <Tooltip title={creator.role} key={index}>
                     <Chip variant="outlined" size="small" label={creator.name} />
                   </Tooltip>
                 ))

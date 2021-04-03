@@ -1,14 +1,6 @@
 import React from "react";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import { Avatar as AvatarMateial, Box, Grid, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
-import { Avatar } from "@marvel-wiki/api-interfaces";
-import { CompassCalibration } from "@material-ui/icons";
-import { AvatarGroup } from "@material-ui/lab";
+import { useHistory } from "react-router-dom";
+import { Grid, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import { avatar } from "../utils";
 
 export interface ComicListProps {
@@ -40,8 +32,12 @@ const useStyles = makeStyles((theme) => ({
 const ComicList: React.SFC<ComicListProps> = ({ comics }) => {
     const classes = useStyles();
     const theme = useTheme();
+    const history = useHistory();
     const matchesXSmall = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
+    const handleComicClick = (comic) => {
+        history.push(`comic/${comic.id}`);
+    }
     const imageSize = () => {
         if(matchesXSmall || matchesSmall) {
             return { width: 100, height: 150 };
@@ -61,7 +57,7 @@ const ComicList: React.SFC<ComicListProps> = ({ comics }) => {
                 !!comics.length && <Grid container wrap="nowrap" className={ classes.container }>
                     {
                         comics.map(comic => (
-                            <Grid item key={comic.id}>
+                            <Grid item key={comic.id} onClick={ () => handleComicClick(comic) }>
                                 <div className={ classes.comic }>
                                     <img className={ classes.image } style={{ ...imageSize() }} src={ avatar(comic.thumbnail) } alt=""/>
                                     <Typography variant="h6" component="h2">

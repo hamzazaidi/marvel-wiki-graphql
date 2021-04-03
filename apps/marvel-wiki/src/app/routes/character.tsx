@@ -4,6 +4,7 @@ import { Switch, Route, useParams, useRouteMatch } from 'react-router-dom';
 import CharacterTopBar from "../components/character-top-bar";
 import { GET_CHARACTER } from "../queries";
 import CharacterDetail from "./character-detail";
+import Comic from "./comic";
 import Event from "./event";
 
 export interface CharacterProps { }
@@ -25,6 +26,9 @@ const Character: React.SFC<CharacterProps> = () => {
                             </Route>
                             <Route path={`${match.path}/event/:eventId`}>
                                 <Event events={ data.character.events } />
+                            </Route>
+                            <Route path={`${match.path}/comic/:comicId`}>
+                                <Comic comics={ data.character.comics } />
                             </Route>
                         </Switch>
                     </div>

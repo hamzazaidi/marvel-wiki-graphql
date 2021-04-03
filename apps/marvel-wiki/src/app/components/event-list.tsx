@@ -69,6 +69,24 @@ const EventList: React.SFC<EventListProps> = ({ events, name }) => {
     setSelectedEvent(null);
   };
   const isSmallScreen = () => matchesSmall || matchesXSmall;
+  const nextEvent = () => {
+    const index = events.indexOf(selectedEvent);
+    const newEvent = events[index + 1];
+    if(newEvent) {
+      setSelectedEvent(newEvent);
+    } else {
+      setSelectedEvent(events[0]);
+    }
+  }
+  const previousEvent = () => {
+    const index = events.indexOf(selectedEvent);
+    const newEvent = events[index - 1];
+    if(newEvent) {
+      setSelectedEvent(newEvent);
+    } else {
+      setSelectedEvent(events[events.length - 1]);
+    }
+  }
   return (
     <div>
       {
@@ -108,7 +126,15 @@ const EventList: React.SFC<EventListProps> = ({ events, name }) => {
         }}
       >
         <div>
-          { selectedEvent && <EventDetail event={ selectedEvent } inModal={ true }/> }
+          { 
+            selectedEvent && 
+              <EventDetail 
+                event={ selectedEvent } 
+                inModal={ true }
+                nextEvent={ nextEvent }
+                previousEvent={ previousEvent }
+              /> 
+          }
         </div>
       </Modal>
     </div>
