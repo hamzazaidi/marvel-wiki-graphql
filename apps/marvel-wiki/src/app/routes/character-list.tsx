@@ -42,7 +42,7 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
         return 6;
     }
     const handleClick = (character) => {
-        history.push(`/character/${character.id}`);
+        history.push(`/character/${character.id}/details`);
     }
     const handleQuery = (nameStartsWith: string) => {
         localStorage.setItem('topbarSearch', 'false')

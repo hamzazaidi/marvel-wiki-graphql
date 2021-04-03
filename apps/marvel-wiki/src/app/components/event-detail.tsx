@@ -74,7 +74,7 @@ const EventDetail: React.SFC<EventDetailProps> = ({ event, inModal }) => {
       return { ...baseStyle, width: 335, height: 375 }
     }
     if (inModal && !isSmallScreen()) {
-      return { ...baseStyle, width: 500, height: 450 }
+      return { ...baseStyle, width: 500, height: 'auto' }
     }
     return { ...baseStyle };
   }
@@ -142,7 +142,7 @@ const EventDetail: React.SFC<EventDetailProps> = ({ event, inModal }) => {
             <div className={classes.itemList}>
               {
                 event.creators.items.map((creator, index) => (
-                  <Tooltip title={ creator.rolex`x` }>
+                  <Tooltip title={ creator.role } key={index}>
                     <Chip variant="outlined" size="small" label={creator.name} />
                   </Tooltip>
                 ))
