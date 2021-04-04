@@ -35,8 +35,8 @@ const useStyles = makeStyles((theme) => ({
     },
     avatar: {
         alignSelf: "center",
-        width: 300,
-        height: 300,
+        width: 250,
+        height: 250,
         border: '2px solid #FFF',
         boxShadow: '0px 0px 25px -10px #FFF',
         margin: 'auto'
@@ -47,7 +47,8 @@ const CharacterTopBar: React.SFC<CharacterTopBarProps> = ({ name, thumbnail }) =
     const theme = useTheme();
     const matchesXSmall = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
-    const smallScreen = () => matchesSmall || matchesXSmall ? {
+    const isSmallScreen = () => matchesSmall || matchesXSmall; 
+    const smallScreen = () => isSmallScreen() ? {
         width: 200, height: 200
     }: {};  
     return (
@@ -60,7 +61,7 @@ const CharacterTopBar: React.SFC<CharacterTopBarProps> = ({ name, thumbnail }) =
                     style={{ ...smallScreen() }}
                     className={classes.avatar}
                 />
-                <Typography align="center" variant="h4" component="h1" color="primary">
+                <Typography align="center" variant={ isSmallScreen() ? 'h6' : 'h3' } component="h1" color="primary">
                     {name}
                 </Typography>
             </div>

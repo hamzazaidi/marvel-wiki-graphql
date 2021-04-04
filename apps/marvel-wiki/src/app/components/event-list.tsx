@@ -13,13 +13,10 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       display: 'flex',
-      justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'row'
     },
     gridContiner: {
-      columns: '7 200px',
-      columnGap: '1.5rem',
       margin: `0 ${theme.spacing(5)}px`
     },
     eventHeader: {
@@ -97,10 +94,10 @@ const EventList: React.SFC<EventListProps> = ({ events, name }) => {
         </div>
       }
       <article className={classes.root}>
-        <div className={classes.gridContiner} style={{ columnWidth: isSmallScreen() ? '100px' : '200px' }}>
+        <div className={classes.gridContiner}>
           {
             events.map(event => (
-              <div className={classes.panel} key={event.id} onClick={() => handleOpen(event.id)}>
+              <div className={classes.panel} style={{ width: isSmallScreen() ? '120px' : '200px' }} key={event.id} onClick={() => handleOpen(event.id)}>
                 <img
                   className={classes.image}
                   src={avatar(event.thumbnail)}

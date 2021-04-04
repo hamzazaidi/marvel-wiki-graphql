@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import ComicDetail from '../components/comic-detail';
 export interface ComicProps {
     comics: any[]
 }
@@ -9,7 +10,7 @@ const Comic: React.SFC<ComicProps> = ({ comics }) => {
     const comic = comics.find(c => c.id === comicId)
     return (
         <div>
-            { JSON.stringify(comic) }
+            <ComicDetail comic={ comic } />
         </div>
     );
 }
