@@ -43,6 +43,7 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
         offset: 0,
         limit: LIMIT
     });
+    const [ page, setPage ] = useState(1)
     const [ metaData, setMetaData ] = useState(null);
     const matchesXSmall = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
@@ -66,13 +67,17 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
     }
     const handleQuery = (nameStartsWith: string) => {
         localStorage.setItem('topbarSearch', 'false');
-        setParams({ ...params, nameStartsWith })
-        refetch({ ...params, nameStartsWith })
+        const args = { ...params, nameStartsWith, offset: 0 }
+        setPage(1);
+        setParams({ ...args })
+        refetch({ ...args })
     }
     const handleOnChange = (event, page) => {
         const newParams = { ...metaData, offset: (page === 1) ? 0 : metaData.limit * page };
-        setParams({ ...params, ...newParams })
-        refetch({ ...params, ...newParams })
+        const args = { ...params, ...newParams };
+        setPage(page);
+        setParams({ ...args });
+        refetch({ ...args });
     }
 
     const calcPages = (): number => {
@@ -87,7 +92,7 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
             </div>
             <div className={classes.gridList}>
                 <div className={ classes.pagination }>
-                    <Pagination size={ isSmallScreen() ? 'small' : 'large' } disabled={loading} count={calcPages()} variant="outlined" color="secondary" onChange={ handleOnChange } />
+                    <Pagination page={ page } size={ isSmallScreen() ? 'small' : 'large' } disabled={loading} count={calcPages()} variant="outlined" color="secondary" onChange={ handleOnChange } />
                 </div>
                 <GridList cellHeight={isSmallScreen() ? 225 : 400} spacing={0} cols={getCols()}>
                     <GridListTile key="Subheader" cols={getCols()} style={{ height: 'auto' }}></GridListTile>
