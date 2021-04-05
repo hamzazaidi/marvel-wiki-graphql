@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client';
 const GET_CHARACTERS = gql`
-query Characters($nameStartsWith: String) {    
-    characters(nameStartsWith: $nameStartsWith)  {
+query Characters($nameStartsWith: String, $offset: Int, $limit: Int) {    
+    characters(nameStartsWith: $nameStartsWith, offset: $offset, limit: $limit)  {
         id
         name
         thumbnail {

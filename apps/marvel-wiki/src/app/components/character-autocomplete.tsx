@@ -47,7 +47,7 @@ const CssTextField = withStyles({
         },
     }, 
 })(TextField);
-
+const LIMIT = 5;
 const CharacterAutocomplete: React.SFC<CharacterAutocompleteProps> = () => {
     const classes = useStyles();
     const theme = useTheme();
@@ -57,7 +57,7 @@ const CharacterAutocomplete: React.SFC<CharacterAutocompleteProps> = () => {
     const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
     const [loadCharacters, { loading, data }] = useLazyQuery(
         GET_CHARACTERS,
-        { variables: { nameStartsWith: searchText } }
+        { variables: { nameStartsWith: searchText, limit: LIMIT } }
     );
     useEffect(() => {
         if (searchText) {

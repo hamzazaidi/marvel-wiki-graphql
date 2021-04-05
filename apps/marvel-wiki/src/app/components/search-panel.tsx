@@ -1,7 +1,8 @@
 import React from 'react';
 import { Button, ButtonGroup, createStyles, makeStyles, Theme } from '@material-ui/core';
 export interface SearchPanelProps {
-    handleQuery: Function
+    handleQuery: Function;
+    loading: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
-const SearchPanel: React.SFC<SearchPanelProps> = ({ handleQuery }) => {
+const SearchPanel: React.SFC<SearchPanelProps> = ({ handleQuery, loading }) => {
     const classes = useStyles();
     const getCharacters = () => {
         const charArray = []
@@ -39,6 +40,8 @@ const SearchPanel: React.SFC<SearchPanelProps> = ({ handleQuery }) => {
                 orientation="vertical"
                 color="secondary"                
                 variant="text"
+                size="small"
+                disabled={ loading }
             >
             {
                 getCharacters().map(c => (
