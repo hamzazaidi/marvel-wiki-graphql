@@ -27,19 +27,21 @@ const useStyles = (inModal) => makeStyles((theme: Theme) =>
     },
     buttonLeft: {
       position: 'absolute',
-      left: 0,
+      left: 10,
       top: '50%',
       transform: 'translateY(-35%)',
       transition: 'all 500ms ease',
-      opacity: 0
+      opacity: 0,
+      border: `2px solid ${theme.palette.secondary.main}`
     },
     buttonRight: {
       position: 'absolute',
-      right: 0,
+      right: 10,
       top: '50%',
       transform: 'translateY(-35%)',
       transition: 'all 500ms ease',
-      opacity: 0
+      opacity: 0,
+      border: `2px solid ${theme.palette.secondary.main}`
     },
     modalContent: {
       margin: theme.spacing(2),
@@ -101,6 +103,7 @@ const EventDetail: React.SFC<EventDetailProps> = ({ event, inModal, nextEvent, p
         color="secondary"
         className={classes.buttonLeft}
         onClick={() => nextEvent()}
+        size="small"
       >
         <ChevronLeft fontSize="large" />
       </IconButton>
@@ -109,6 +112,7 @@ const EventDetail: React.SFC<EventDetailProps> = ({ event, inModal, nextEvent, p
         color="secondary"
         className={classes.buttonRight}
         onClick={() => previousEvent()}
+        size="small"
       >
         <ChevronRight fontSize="large" />
       </IconButton>
@@ -123,27 +127,31 @@ const EventDetail: React.SFC<EventDetailProps> = ({ event, inModal, nextEvent, p
         <Typography variant="body1" component="div" color="textSecondary">
           {event.description}
         </Typography>
-        <div>
-          <Typography variant="subtitle2" component="span" color="primary">
-            Event happen previously:
-          </Typography>
-          <Typography variant="caption" component="span" color="textSecondary">
-            <Box component="span" ml={1}>{event.previous.name}</Box>
-          </Typography>
-        </div>
-        <div>
-          <Typography variant="subtitle2" component="span" color="primary">
-            Event happen next:
-            </Typography>
-          <Typography variant="caption" component="span" color="textSecondary">
-            <Box component="span" ml={1}>{event.next.name}</Box>
-          </Typography>
-        </div>
         {
-          !inModal && <CharactersChips type="Event" characters={ event.characters } handleCharacterClick={ handleCharacterClick }/>
+          event?.previous && <div>
+            <Typography variant="subtitle2" component="span" color="primary">
+              Event happen previously:
+            </Typography>
+            <Typography variant="caption" component="span" color="textSecondary">
+              <Box component="span" ml={1}>{event?.previous?.name}</Box>
+            </Typography>
+          </div>
         }
         {
-          !inModal && <CreatorsChips type="Event" creators={ event.creators }  />
+          event?.next && <div>
+            <Typography variant="subtitle2" component="span" color="primary">
+              Event happen next:
+              </Typography>
+            <Typography variant="caption" component="span" color="textSecondary">
+              <Box component="span" ml={1}>{event?.next?.name}</Box>
+            </Typography>
+          </div>
+        }
+        {
+          !inModal && <CharactersChips type="Event" characters={event.characters} handleCharacterClick={handleCharacterClick} />
+        }
+        {
+          !inModal && <CreatorsChips type="Event" creators={event.creators} />
         }
         {
           inModal && <Button color="secondary" onClick={() => handleDetailsClick(event.id)}>

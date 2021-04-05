@@ -15,7 +15,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-around',
         overflow: 'hidden',        
     },
     gridList: {
@@ -90,7 +89,7 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
                 <div className={ classes.pagination }>
                     <Pagination size={ isSmallScreen() ? 'small' : 'large' } disabled={loading} count={calcPages()} variant="outlined" color="secondary" onChange={ handleOnChange } />
                 </div>
-                <GridList cellHeight={400} spacing={0} cols={getCols()}>
+                <GridList cellHeight={isSmallScreen() ? 225 : 400} spacing={0} cols={getCols()}>
                     <GridListTile key="Subheader" cols={getCols()} style={{ height: 'auto' }}></GridListTile>
                     {characterList?.characters.map((character) => (
                         <Zoom in={!!character} key={character.id}>

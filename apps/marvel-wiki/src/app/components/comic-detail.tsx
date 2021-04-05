@@ -56,19 +56,21 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         buttonLeft: {
             position: 'absolute',
-            left: 0,
+            left: 10,
             top: '50%',
             transform: 'translateY(-35%)',
             transition: 'all 500ms ease',
-            opacity: 0
+            opacity: 0,
+            border: `2px solid ${theme.palette.secondary.main}`
         },
         buttonRight: {
             position: 'absolute',
-            right: 0,
+            right: 10,
             top: '50%',
             transform: 'translateY(-35%)',
             transition: 'all 500ms ease',
-            opacity: 0
+            opacity: 0,
+            border: `2px solid ${theme.palette.secondary.main}`
         },
     }),
 );
@@ -122,6 +124,7 @@ const ComicDetail: React.SFC<ComicDetailProps> = ({ comic }) => {
                             color="secondary"
                             className={classes.buttonLeft}
                             onClick={() => nextImage()}
+                            size="small"
                         >
                             <ChevronLeft fontSize="large" />
                         </IconButton>
@@ -129,6 +132,7 @@ const ComicDetail: React.SFC<ComicDetailProps> = ({ comic }) => {
                             color="secondary"
                             className={classes.buttonRight}
                             onClick={() => previousImage()}
+                            size="small"
                         >
                             <ChevronRight fontSize="large" />
                         </IconButton>

@@ -3,7 +3,6 @@ import { ApolloClient, InMemoryCache, ApolloProvider, ApolloLink, createHttpLink
 import React, { useEffect, useState } from 'react';
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 import Navbar from './components/nav-bar';
 import CharacterList from './routes/character-list';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
