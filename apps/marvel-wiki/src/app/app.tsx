@@ -8,7 +8,7 @@ import Navbar from './components/nav-bar';
 import CharacterList from './routes/character-list';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Character from './routes/character';
-import { primaryColor } from './colors'
+import { primaryColor, secondaryColor } from './colors'
 import SplashScreen from './components/splash-screen';
 
 const uri = '/graphql';
@@ -39,7 +39,9 @@ const theme = createMuiTheme(
       primary: {
         main: primaryColor,
       },
-      secondary: deepPurple,
+      secondary: {
+        main: secondaryColor
+      },
     },
     typography: {
       fontFamily: 'Roboto Condensed'
