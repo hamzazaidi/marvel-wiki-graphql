@@ -1,7 +1,11 @@
 import { Avatar } from "@marvel-wiki/api-interfaces";
 
-export const avatar = (thumbnail: Avatar): string =>
-`${thumbnail.path}.${thumbnail.extension}`;
+export const avatar = (thumbnail: Avatar): string => {
+    if(thumbnail.path.includes('image_not_available')) {
+        return null;
+    }
+    return `${thumbnail.path}.${thumbnail.extension}`;
+}
 
 
 export const getIdFromUri = (resourceURI: string) => {

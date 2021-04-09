@@ -11,6 +11,7 @@ import { GET_CHARACTERS } from '../queries'
 import SearchPanel from '../components/search-panel';
 import { avatar } from '../utils';
 import { Pagination } from '@material-ui/lab';
+import { Avatar } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
@@ -30,6 +31,11 @@ const useStyles = makeStyles((theme) => ({
         '& .MuiPagination-ul': {
             justifyContent: 'center'
         }
+    },
+    image: {
+        width: '100%',
+        height: '100%',
+        fontSize: '10rem'
     }
 }));
 export interface CharacterListProps { }
@@ -99,7 +105,9 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
                     {characterList?.characters.map((character) => (
                         <Zoom in={!!character} key={character.id}>
                             <GridListTile onClick={() => handleClick(character)} >                            
-                                    <img src={avatar(character.thumbnail)} />
+                                    <Avatar sizes="large" variant="square" className={ classes.image } src={avatar(character.thumbnail)}>
+                                        {character.name.charAt(0)}
+                                    </Avatar>
                                     <GridListTileBar
                                         title={character.name}
                                     />                        

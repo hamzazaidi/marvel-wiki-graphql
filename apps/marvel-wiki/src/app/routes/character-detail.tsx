@@ -3,6 +3,7 @@ import Description from "../components/description";
 import ComicList from "../components/comic-list";
 import { createStyles, Grid, makeStyles, Theme } from "@material-ui/core";
 import EventList from "../components/event-list";
+
 export interface CharacterDetailProps {
     character: any;
 }
