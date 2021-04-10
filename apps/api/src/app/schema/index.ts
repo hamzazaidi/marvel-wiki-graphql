@@ -42,7 +42,6 @@ const RootQuery = new GraphQLObjectType({
           const params = pruneParams({
             ...args
           })
-          console.log('Params ==>', params)
           const url = getUrl("characters", { ...params });
           const result = await axios.get<MarvelApiResponse>(url);
           const { results, ...metaData } = result.data.data;

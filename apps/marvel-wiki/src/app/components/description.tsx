@@ -8,7 +8,9 @@ export interface DescriptionProps {
 }
 const useStyles = makeStyles((theme) => ({
     description: {
-        display: "flex"
+        display: "flex",
+        width: '80%',
+        margin: '0 auto'
     },
     descriptionCard: {
         maxWidth: 500,

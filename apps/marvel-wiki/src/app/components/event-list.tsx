@@ -1,4 +1,4 @@
-import {createStyles, makeStyles, Theme, Typography, useMediaQuery, useTheme } from "@material-ui/core";
+import {Button, createStyles, makeStyles, Theme, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import React, { useState } from "react";
@@ -21,10 +21,15 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     eventHeader: {
       paddingLeft: theme.spacing(5),
-      marginBottom: theme.spacing(1)
+      paddingRight: theme.spacing(5),
+      marginBottom: theme.spacing(1),
+      display: 'flex',
+      '& div': {
+          flexGrow: 1
+      }
     },
     panel: {
-      margin: '0 1.5rem 1.5rem 0',
+      margin: theme.spacing(1),
       display: 'inline-block',
       width: '100%',
       border: '2px solid black',
@@ -87,17 +92,22 @@ const EventList: React.SFC<EventListProps> = ({ events, name }) => {
     <div>
       {
         !!events.length && <div className={classes.eventHeader}>
-          <Typography variant={isSmallScreen() ? 'h5' : 'h3'} component="h2">
-            Major events <Typography variant={isSmallScreen() ? 'h5' : 'h3'} component="span" color="textSecondary">{name}</Typography> was part of...
-          </Typography>
-          <Typography variant="body1" component="h2" color="textSecondary">how this marvel character involved in the event</Typography>
+          <div>
+            <Typography variant={isSmallScreen() ? 'h5' : 'h3'} component="h2">
+              Major events <Typography variant={isSmallScreen() ? 'h5' : 'h3'} component="span" color="textSecondary">{name}</Typography> was part of...
+            </Typography>
+            <Typography variant="body1" component="h2" color="textSecondary">how this marvel character involved in the event</Typography>
+          </div>
+          <Button color="secondary">
+            see all
+          </Button>
         </div>
       }
       <article className={classes.root}>
         <div className={classes.gridContiner}>
           {
             events.map(event => (
-              <div className={classes.panel} style={{ width: isSmallScreen() ? '120px' : '200px' }} key={event.id} onClick={() => handleOpen(event.id)}>
+              <div className={classes.panel} style={{ width: isSmallScreen() ? '120px' : '220px' }} key={event.id} onClick={() => handleOpen(event.id)}>
                 <img
                   className={classes.image}
                   src={avatar(event.thumbnail)}

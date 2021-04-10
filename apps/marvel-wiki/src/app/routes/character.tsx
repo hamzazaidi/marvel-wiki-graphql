@@ -1,4 +1,5 @@
 import { useQuery } from "@apollo/client";
+import { makeStyles } from "@material-ui/core";
 import React from "react";
 import { Switch, Route, useParams, useRouteMatch } from 'react-router-dom';
 import CharacterTopBar from "../components/character-top-bar";
@@ -19,7 +20,7 @@ const Character: React.SFC<CharacterProps> = () => {
             { data && 
                 <div>
                     <CharacterTopBar name={data.character.name} thumbnail={data.character.thumbnail} />
-                    <div className="content">
+                    <div>
                         <Switch>
                             <Route path={`${match.path}/details`}>
                                 <CharacterDetail character={data}/>

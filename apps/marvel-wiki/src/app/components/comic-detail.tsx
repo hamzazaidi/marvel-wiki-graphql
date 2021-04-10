@@ -24,8 +24,8 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex'
         },
         mainImage: {
-            width: 300,
-            height: 450,
+            width: '100%',
+            height: 750,
             boxShadow: theme.shadows[5]
         },
         smallImage: {
@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
             boxShadow: theme.shadows[5]
         },
         addtionalImages: {
-            width: 300,
+            width: '100%',
             display: 'flex',
             overflowX: 'auto',
             backgroundColor: '#ededed',
@@ -119,7 +119,7 @@ const ComicDetail: React.SFC<ComicDetailProps> = ({ comic }) => {
             <div className={classes.content} style={{ flexDirection: isSmallScreen() ? 'column' : 'row' }}>
                 <div>
                     <div className={classes.displayImageContainer} >
-                        <img src={avatar(displayImage)} alt="" className={classes.mainImage} />
+                        <img src={avatar(displayImage)} alt="" className={classes.mainImage} style={{ height: isSmallScreen() ? 350 : 750 }}/>
                         <IconButton
                             color="secondary"
                             className={classes.buttonLeft}
@@ -137,13 +137,15 @@ const ComicDetail: React.SFC<ComicDetailProps> = ({ comic }) => {
                             <ChevronRight fontSize="large" />
                         </IconButton>
                     </div>
-                    <div className={classes.addtionalImages}>
-                        {
-                            comic.images.map((image, i) => (
-                                <img key={i} src={avatar(image)} alt="" className={classes.smallImage} />
-                            ))
-                        }
-                    </div>
+                    {
+                        comic.images.length > 1 && <div className={classes.addtionalImages}>
+                            {
+                                comic.images.map((image, i) => (
+                                    <img key={i} src={avatar(image)} alt="" className={classes.smallImage} />
+                                ))
+                            }
+                        </div>
+                    }
                 </div>
                 <div className={classes.comicDetails} style={{ ...comicDetailsStyles() }}>
                     <Description description={comic.description} justifyContent="flex-start" />
