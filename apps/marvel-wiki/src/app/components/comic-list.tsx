@@ -55,7 +55,7 @@ const ComicList: React.SFC<ComicListProps> = ({ comics }) => {
         if(matchesXSmall || matchesSmall) {
             return { width: 100, height: 150 };
         }
-        return {width: 220, height: 250 }
+        return {width: 165, height: 250 }
     }
     const isSmallScreen = () => matchesSmall || matchesXSmall;
     return (
