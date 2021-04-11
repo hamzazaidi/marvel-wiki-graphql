@@ -16,8 +16,12 @@ const httpLink = createHttpLink({
 })
 const afterwareLink = new ApolloLink((operation, forward) => {
   return forward(operation).map((response) => {
-    const context = operation.getContext()
+    const context = operation.getContext();
     const metaData = context.response.headers.get('meta-data')
+    const metaDataComics = context.response.headers.get('meta-data-comics')
+    const metaDataEvents = context.response.headers.get('meta-data-events')
+    if(metaDataComics) { localStorage.setItem('meta-data-comics', metaDataComics) }
+    if(metaDataEvents) { localStorage.setItem('meta-data-events', metaDataEvents) }
     if(localStorage.getItem('topbarSearch') !== 'true' && metaData) {
       localStorage.setItem('meta-data', metaData)
     }

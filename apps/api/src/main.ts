@@ -6,7 +6,7 @@ import cors from 'cors';
 import { schema } from './app/schema'
 const corsOptions = {
   origin: '*',  
-  exposedHeaders: ['meta-data'],
+  exposedHeaders: ['meta-data', 'meta-data-comics', 'meta-data-events'],
 }
 const app = express();
 app.use(cors(corsOptions));

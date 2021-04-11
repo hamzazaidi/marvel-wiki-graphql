@@ -27,10 +27,10 @@ const CharacterDetail: React.SFC<CharacterDetailProps> = ({ character }) => {
                                 <Description description={character.character.description} justifyContent="center" />            
                             </Grid>
                             <Grid item xs={12} sm={12} md={12} lg={12}>
-                                <EventList events={ character.character.events } name={ character.character.name }/>
+                                <EventList events={ character.character.events } name={ character.character.name } showHeader={ true }/>
                             </Grid>                            
                             <Grid item xs={12} sm={12} md={12} lg={12}>
-                                <ComicList comics={character.character.comics} />      
+                                <ComicList comics={character.character.comics}  showHeader={ true } />      
                             </Grid>                            
                         </Grid>
                     </div>

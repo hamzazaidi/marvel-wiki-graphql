@@ -79,7 +79,7 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
         refetch({ ...args })
     }
     const handleOnChange = (event, page) => {
-        const newParams = { ...metaData, offset: (page === 1) ? 0 : metaData.limit * page };
+        const newParams = { ...metaData, offset: (page === 1) ? 0 : metaData.offset + metaData.count };
         const args = { ...params, ...newParams };
         setPage(page);
         setParams({ ...args });

@@ -4,9 +4,11 @@ import Backdrop from '@material-ui/core/Backdrop';
 import React, { useState } from "react";
 import { avatar } from "../utils";
 import EventDetail from "./event-detail";
+import { useHistory, useParams } from "react-router-dom";
 export interface EventListProps {
   events: any[];
-  name: string;
+  name?: string;
+  showHeader: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -54,8 +56,11 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const EventList: React.SFC<EventListProps> = ({ events, name }) => {
+const EventList: React.SFC<EventListProps> = ({ events, name, showHeader }) => {
   const classes = useStyles();
+  const { id } = useParams();
+  const history = useHistory();
+  const metaData = JSON.parse(localStorage.getItem('meta-data-events'));
   const [open, setOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const handleOpen = (id) => {
@@ -88,19 +93,22 @@ const EventList: React.SFC<EventListProps> = ({ events, name }) => {
       setSelectedEvent(events[events.length - 1]);
     }
   }
+  const handleSeeAll = () => history.push(`/character/${id}/search-events`)
   return (
     <div>
       {
-        !!events.length && <div className={classes.eventHeader}>
+        !!events.length && showHeader && <div className={classes.eventHeader}>
           <div>
             <Typography variant={isSmallScreen() ? 'h5' : 'h3'} component="h2">
               Major events <Typography variant={isSmallScreen() ? 'h5' : 'h3'} component="span" color="textSecondary">{name}</Typography> was part of...
             </Typography>
             <Typography variant="body1" component="h2" color="textSecondary">how this marvel character involved in the event</Typography>
           </div>
-          <Button color="secondary">
-            see all
-          </Button>
+          {
+              (metaData.total > metaData.limit) && <Button onClick={ handleSeeAll } color="secondary">
+                  see all
+              </Button>
+          }
         </div>
       }
       <article className={classes.root}>

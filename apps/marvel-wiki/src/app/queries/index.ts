@@ -91,8 +91,84 @@ const GET_CHARACTER = gql`
   }
 `
 
+const GET_COMICS = gql`
+  query Comics($id: Int, $offset: Int, $limit: Int) {
+    comics(id: $id, offset: $offset, limit: $limit)  {
+      id
+      title
+      description
+      pageCount
+      textObjects{
+        text
+      }
+      prices{
+        type
+        price
+      }
+      thumbnail {
+        path
+        extension
+      }
+      images {
+        path
+        extension
+      }
+      creators {
+        items {
+          name
+          role
+        }
+      },
+      characters {
+        available
+        items {
+          resourceURI
+          name
+        }
+      }
+    }
+  }
+`
+
+const GET_EVENTS = gql`
+  query Events($id: Int, $offset: Int, $limit: Int) {
+    events(id: $id, offset: $offset, limit: $limit)  {
+      id
+        title
+        description
+        start
+        end
+        thumbnail {
+          path
+          extension
+        }
+        next {
+          name
+        }
+        previous{
+          name
+        }
+        creators {
+          available
+          items {
+            name
+            role
+          }
+        }
+        characters {
+          available
+          items {
+            resourceURI
+            name
+          }
+        }
+    }
+  }
+`
 
 export {
   GET_CHARACTERS,
-  GET_CHARACTER
+  GET_CHARACTER,
+  GET_COMICS,
+  GET_EVENTS
 }

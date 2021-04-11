@@ -10,7 +10,7 @@ interface Params {
 export const getUrl = (urlPart: string, params: Params = {}): string => {
     const qs =  Object.keys({ ...params})
                     .map(key => `${key}=${params[key]}`)
-                    .join('&');
+                    .join('&');    
     const ts = String(Date.now());
     const hash = md5(ts+privateKey+publicKey);
     const url = `${baseUrl}/${urlPart}?ts=${ts}&apikey=${publicKey}&hash=${hash}&${qs}`;          
@@ -18,9 +18,9 @@ export const getUrl = (urlPart: string, params: Params = {}): string => {
 }
 
 
-export const pruneParams = (params) => {
+export const pruneParams = (params, excludeKeys = []) => {
     return  Object.keys(params).reduce((acc, curr) => {
-        if(params[curr]) {
+        if(params[curr] && !excludeKeys.includes(curr)) {
             acc[curr] = params[curr];
         }
         return acc;

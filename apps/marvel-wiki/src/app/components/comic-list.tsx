@@ -1,10 +1,11 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { Button, Grid, makeStyles, Typography, useMediaQuery, useTheme } from "@material-ui/core";
 import { avatar } from "../utils";
 
 export interface ComicListProps {
     comics: any[];
+    showHeader: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -42,10 +43,12 @@ const useStyles = makeStyles((theme) => ({
     },    
 }));
 
-const ComicList: React.SFC<ComicListProps> = ({ comics }) => {
+const ComicList: React.SFC<ComicListProps> = ({ comics, showHeader }) => {
     const classes = useStyles();
     const theme = useTheme();
+    const { id } = useParams();
     const history = useHistory();
+    const metaData = JSON.parse(localStorage.getItem('meta-data-comics'));
     const matchesXSmall = useMediaQuery(theme.breakpoints.down('xs'));
     const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
     const handleComicClick = (comic) => {
@@ -58,17 +61,20 @@ const ComicList: React.SFC<ComicListProps> = ({ comics }) => {
         return {width: 165, height: 250 }
     }
     const isSmallScreen = () => matchesSmall || matchesXSmall;
+    const handleSeeAll = () => history.push(`/character/${id}/search-comics`)
     return (
         <div className={ classes.root }>
             {
-                !!comics.length && <div className={ classes.comicHeader }>
+                !!comics.length && showHeader && <div className={ classes.comicHeader }>
                     <div>
                         <Typography variant={ isSmallScreen() ? 'h5' : 'h3' } component="h2">Featured</Typography>
                         <Typography variant="body1" component="h2" color="textSecondary">comic books we love</Typography>
                     </div>
-                    <Button color="secondary">
-                      see all
-                    </Button>
+                    {
+                        (metaData.total > metaData.limit) && <Button onClick={ handleSeeAll } color="secondary">
+                            see all
+                        </Button>
+                    }
                 </div>
             }   
             {    
