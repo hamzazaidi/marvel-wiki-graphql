@@ -99,7 +99,37 @@ const RootQuery = new GraphQLObjectType({
           console.log("🚀 ~ file: index.ts ~ line 37 ~ resolve ~ error", error.message);
         }
       }
-    }
+    },
+    comic: {
+      type: Comic,
+      args: {
+        id: { type: GraphQLID },
+      },
+      async resolve(parent, args, context) {
+        try {
+          const url = getUrl(`comics/${args.id}`);
+          const result = await axios.get<MarvelApiResponse>(url);
+          return result.data.data.results[0];
+        } catch (error) {
+          console.log("🚀 ~ file: index.ts ~ line 39 ~ resolve ~ error");
+        }
+      },
+    },
+    event: {
+      type: Event,
+      args: {
+        id: { type: GraphQLID },
+      },
+      async resolve(parent, args, context) {
+        try {
+          const url = getUrl(`events/${args.id}`);
+          const result = await axios.get<MarvelApiResponse>(url);
+          return result.data.data.results[0];
+        } catch (error) {
+          console.log("🚀 ~ file: index.ts ~ line 39 ~ resolve ~ error");
+        }
+      },
+    },
   },
 });
 

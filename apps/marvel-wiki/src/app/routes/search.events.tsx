@@ -40,10 +40,11 @@ const SearchEvents: React.SFC<SearchEventsProps> = () => {
             setMetaData(metaDataInLocalStorage);
         }
     });   
-    const handleOnChange = (event, page) => {
-        const newParams = { ...metaData, offset: (page === 1) ? 0 : metaData.offset + metaData.count };
+    const handleOnChange = (event, pageFromComponent) => {
+        const offset = pageFromComponent === 1 ? 0 : (pageFromComponent -1) * LIMIT
+        let newParams = { ...params, offset }
         const args = { ...params, ...newParams };
-        setPage(page);
+        setPage(pageFromComponent);
         setParams({ ...args });
         refetch({ ...args });
     }

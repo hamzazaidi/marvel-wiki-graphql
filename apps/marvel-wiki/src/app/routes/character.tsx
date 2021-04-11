@@ -34,10 +34,10 @@ const Character: React.SFC<CharacterProps> = () => {
                                 <SearchEvents />
                             </Route>
                             <Route path={`${match.path}/event/:eventId`}>
-                                <Event events={ data.character.events } />
+                                <Event />
                             </Route>
                             <Route path={`${match.path}/comic/:comicId`}>
-                                <Comic comics={ data.character.comics } />
+                                <Comic />
                             </Route>
                         </Switch>
                     </div>

@@ -1,10 +1,10 @@
+import { useQuery } from '@apollo/client';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import EventDetail from '../components/event-detail';
-export interface EventProps {
-    events: any[]
-}
+import { GET_EVENT_BY_ID } from '../queries';
+export interface EventProps {}
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -17,13 +17,15 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
  
-const Event: React.SFC<EventProps> = ({ events }) => {
+const Event: React.SFC<EventProps> = () => {
     const classes = useStyles();
     const { eventId } = useParams();
-    const event = events.find(e => e.id === eventId)
+    const { loading, error, data } = useQuery(GET_EVENT_BY_ID, {
+        variables: { id: eventId },
+    });
     return (
         <div className={ classes.content }>
-            <EventDetail event={ event } inModal={false} nextEvent={()=>{}} previousEvent={() => {}}/>
+            { data && <EventDetail event={ data.event } inModal={false} nextEvent={()=>{}} previousEvent={() => {}}/> }
         </div>
     );
 }

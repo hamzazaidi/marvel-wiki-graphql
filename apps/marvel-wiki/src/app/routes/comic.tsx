@@ -1,10 +1,10 @@
+import { useQuery } from '@apollo/client';
 import { createStyles, makeStyles, Theme } from '@material-ui/core';
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import ComicDetail from '../components/comic-detail';
-export interface ComicProps {
-    comics: any[]
-}
+import { GET_COMIC_BY_ID } from '../queries';
+export interface ComicProps {}
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -17,13 +17,15 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-const Comic: React.SFC<ComicProps> = ({ comics }) => {
+const Comic: React.SFC<ComicProps> = () => {
     const classes = useStyles();
     const { comicId } = useParams();
-    const comic = comics.find(c => c.id === comicId)
+    const { loading, error, data } = useQuery(GET_COMIC_BY_ID, {
+        variables: { id: comicId },
+    });
     return (
         <div className={ classes.content }>
-            <ComicDetail comic={ comic } />
+            { data && <ComicDetail comic={ data.comic } /> }
         </div>
     );
 }

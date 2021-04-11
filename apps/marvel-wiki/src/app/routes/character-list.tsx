@@ -40,15 +40,16 @@ const useStyles = makeStyles((theme) => ({
 }));
 export interface CharacterListProps { }
 const LIMIT = 12;
+const DEFAULT_PARAM_STATE = {
+    nameStartsWith: '',
+    offset: 0,
+    limit: LIMIT
+}
 const CharacterList: React.SFC<CharacterListProps> = () => {
     const classes = useStyles();
     const theme = useTheme();
     const history = useHistory();
-    const [ params, setParams ] = useState({
-        nameStartsWith: '',
-        offset: 0,
-        limit: LIMIT
-    });
+    const [ params, setParams ] = useState(DEFAULT_PARAM_STATE);
     const [ page, setPage ] = useState(1)
     const [ metaData, setMetaData ] = useState(null);
     const matchesXSmall = useMediaQuery(theme.breakpoints.down('xs'));
@@ -78,10 +79,11 @@ const CharacterList: React.SFC<CharacterListProps> = () => {
         setParams({ ...args })
         refetch({ ...args })
     }
-    const handleOnChange = (event, page) => {
-        const newParams = { ...metaData, offset: (page === 1) ? 0 : metaData.offset + metaData.count };
+    const handleOnChange = (event, pageFromComponent) => {
+        const offset = pageFromComponent === 1 ? 0 : (pageFromComponent -1) * LIMIT
+        let newParams = { ...DEFAULT_PARAM_STATE, offset }
         const args = { ...params, ...newParams };
-        setPage(page);
+        setPage(pageFromComponent);
         setParams({ ...args });
         refetch({ ...args });
     }

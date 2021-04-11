@@ -10,7 +10,10 @@ import Description from "./description";
 export interface ComicDetailProps {
     comic: any;
 }
-
+const PriceEnum = {
+    printPrice: 'Print Price',
+    digitalPurchasePrice: 'Digital Purchase Price'
+}
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
@@ -120,22 +123,26 @@ const ComicDetail: React.SFC<ComicDetailProps> = ({ comic }) => {
                 <div>
                     <div className={classes.displayImageContainer} >
                         <img src={avatar(displayImage)} alt="" className={classes.mainImage} style={{ height: isSmallScreen() ? 350 : 750 }}/>
-                        <IconButton
-                            color="secondary"
-                            className={classes.buttonLeft}
-                            onClick={() => nextImage()}
-                            size="small"
-                        >
-                            <ChevronLeft fontSize="large" />
-                        </IconButton>
-                        <IconButton
-                            color="secondary"
-                            className={classes.buttonRight}
-                            onClick={() => previousImage()}
-                            size="small"
-                        >
-                            <ChevronRight fontSize="large" />
-                        </IconButton>
+                        {
+                            comic.images.length > 1 && <IconButton
+                                color="secondary"
+                                className={classes.buttonLeft}
+                                onClick={() => nextImage()}
+                                size="small"
+                            >
+                                <ChevronLeft fontSize="large" />
+                            </IconButton>
+                        }
+                        {
+                            comic.images.length > 1 && <IconButton
+                                color="secondary"
+                                className={classes.buttonRight}
+                                onClick={() => previousImage()}
+                                size="small"
+                            >
+                                <ChevronRight fontSize="large" />
+                            </IconButton>
+                        }
                     </div>
                     {
                         comic.images.length > 1 && <div className={classes.addtionalImages}>
@@ -148,7 +155,19 @@ const ComicDetail: React.SFC<ComicDetailProps> = ({ comic }) => {
                     }
                 </div>
                 <div className={classes.comicDetails} style={{ ...comicDetailsStyles() }}>
-                    <Description description={comic.description} justifyContent="flex-start" />
+                    <Description description={comic.description} justifyContent="flex-start"/>
+                    {
+                        comic.pageCount > 0 && <div>
+                            Pages: <Typography variant={isSmallScreen() ? 'h6' : 'h5'} component="span">{comic.pageCount}</Typography>
+                        </div>
+                    }
+                    <div>
+                        {
+                            comic.prices.map((p,i) => (
+                                <div key={i}>{ PriceEnum[p.type] }: <Typography variant={isSmallScreen() ? 'h6' : 'h5'} component="span">${p.price}</Typography></div> 
+                            ))
+                        }
+                    </div>
                     <CharactersChips
                         characters={comic.characters}
                         handleCharacterClick={handleCharacterClick}
