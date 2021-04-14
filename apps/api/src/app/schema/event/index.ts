@@ -4,7 +4,7 @@ import {
   GraphQLString,
   GraphQLList,
 } from "graphql";
-import { Avatar, Url } from "../shared";
+import { Avatar, Creators, EntityCharacters, Url } from "../shared";
 
 export const EventSummary = new GraphQLObjectType({
   name: "EventSummary",
@@ -28,5 +28,7 @@ export const Event = new GraphQLObjectType({
     thumbnail: { type: Avatar },
     next: { type: EventSummary },
     previous: { type: EventSummary },
+    creators: { type: Creators },
+    characters: { type: EntityCharacters }
   }),
 });

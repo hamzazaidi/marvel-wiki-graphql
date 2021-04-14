@@ -1,6 +1,6 @@
 import { GraphQLObjectType, GraphQLID, GraphQLString } from "graphql";
 import { ComicSummary } from "../comic";
-import { Avatar } from "../shared";
+import { Avatar, Creators, EntityCharacters } from "../shared";
 
 export const Story = new GraphQLObjectType({
     name: 'Story',
@@ -12,7 +12,9 @@ export const Story = new GraphQLObjectType({
       type: { type: GraphQLString },
       modified: { type: GraphQLString },
       thumbnail: { type: Avatar },
-      originalissue: { type: ComicSummary }
+      originalissue: { type: ComicSummary },
+      creators: { type: Creators },
+      characters: { type: EntityCharacters }
     })
   })
   

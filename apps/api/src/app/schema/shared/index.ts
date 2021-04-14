@@ -1,4 +1,4 @@
-import { GraphQLObjectType, GraphQLString } from "graphql";
+import { GraphQLList, GraphQLObjectType, GraphQLString } from "graphql";
 
 export const TextObject = new GraphQLObjectType({
   name: "TextObject",
@@ -24,3 +24,35 @@ export const Avatar = new GraphQLObjectType({
     extension: { type: GraphQLString },
   }),
 });
+
+export const Creator = new GraphQLObjectType({
+  name: "Creator",
+  fields: () => ({
+    name: { type: GraphQLString },
+    role: { type: GraphQLString }
+  })
+})
+
+export const Creators = new GraphQLObjectType({
+  name: "Creators",
+  fields: () => ({
+    available: { type: GraphQLString },
+    items: { type: new GraphQLList(Creator) }
+  })
+})
+
+export const EntityCharacter = new GraphQLObjectType({
+  name: "EntityCharacter",
+  fields: () => ({
+    resourceURI: { type: GraphQLString },
+    name: { type: GraphQLString }
+  })
+})
+
+export const EntityCharacters = new GraphQLObjectType({
+  name: "EntityCharacters",
+  fields: () => ({
+    available: { type: GraphQLString },
+    items: { type: new GraphQLList(EntityCharacter) }
+  })
+})

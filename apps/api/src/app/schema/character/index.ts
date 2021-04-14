@@ -24,33 +24,37 @@ export const Character = new GraphQLObjectType({
     resourceURI: { type: GraphQLString },
     comics: {
       type: new GraphQLList(Comic),
-      async resolve(parent, args) {
+      async resolve(parent, args, context) {
         try {
           const url = getUrl(`characters/${parent.id}/comics`);
           const result = await axios.get<MarvelApiResponse>(url);
-          return result.data.data.results;
+          const { results, ...metaData } = result.data.data;
+          context.res.set('meta-data-comics', JSON.stringify({ ...metaData }));
+          return results;
         } catch (error) {
           console.log("🚀 ~ file: index.ts ~ line 39 ~ resolve ~ error", error);
         }
       },
     },
     events: {
-      type: new GraphQLList(Series),
-      async resolve(parent, args) {
+      type: new GraphQLList(Event),
+      async resolve(parent, args, context) {
         try {
-          const url = getUrl(`characters/${parent.id}/series`);
+          const url = getUrl(`characters/${parent.id}/events`);
           const result = await axios.get<MarvelApiResponse>(url);
-          return result.data.data.results;
+          const { results, ...metaData } = result.data.data;
+          context.res.set('meta-data-events', JSON.stringify({ ...metaData }));
+          return results;
         } catch (error) {
           console.log("🚀 ~ file: index.ts ~ line 39 ~ resolve ~ error", error);
         }
       },
     },
     series: {
-      type: new GraphQLList(Event),
+      type: new GraphQLList(Series),
       async resolve(parent, args) {
         try {
-          const url = getUrl(`characters/${parent.id}/events`);
+          const url = getUrl(`characters/${parent.id}/series`);
           const result = await axios.get<MarvelApiResponse>(url);
           return result.data.data.results;
         } catch (error) {
