@@ -38,6 +38,7 @@ const useStyles = makeStyles((theme: Theme) =>
             boxShadow: theme.shadows[5]
         },
         addtionalImages: {
+            maxWidth: 525,
             width: '100%',
             display: 'flex',
             overflowX: 'auto',
