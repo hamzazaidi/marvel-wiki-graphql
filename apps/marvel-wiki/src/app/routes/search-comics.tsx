@@ -41,7 +41,7 @@ const SearchComics: React.SFC<SearchComicsProps> = () => {
     });
     const handleOnChange = (event, pageFromComponent) => {
         const offset = pageFromComponent === 1 ? 0 : (pageFromComponent -1) * LIMIT
-        let newParams = { ...params, offset }
+        let newParams = { offset }
         const args = { ...params, ...newParams };
         setPage(pageFromComponent);
         setParams({ ...args });
